@@ -897,7 +897,9 @@
         var imgHtml = imgCount > 0 ? '<button class="' + imgClass + ' statClick" data-kind="img">' + imgInner + '</button>' : '<span class="' + imgClass + '">' + imgInner + '</span>';
         var pdfInner = '' + pdfCount;
         var pdfHtml = pdfCount > 0 ? '<button class="' + pdfClass + ' statClick" data-kind="pdf">' + pdfInner + '</button>' : '<span class="' + pdfClass + '">' + pdfInner + '</span>';
-        var html = '<!doctype html><html><head><meta charset="utf-8"><title>Sitemap-vy</title><link rel="icon" href="' + siteFavicon + '"><style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#1f1f1f;color:#fff;margin:0}#top{position:sticky;top:0;background:#111827;border-bottom:1px solid #2c2c2c;z-index:3}#topInner{max-width:1280px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:10px;justify-content:center}#k{width:min(1100px,80vw);padding:12px 16px;border-radius:999px;border:1px solid #4b5563;background:#020617;color:#fff;font-size:16px;outline:none;box-shadow:0 0 0 1px #020617,0 0 0 3px rgba(148,163,184,0.35)}#k:focus{box-shadow:0 0 0 1px #0f172a,0 0 0 5px rgba(56,189,248,0.35);border-color:#60a5fa;background:#020617}button{padding:6px 10px;background:#3b3b3b;color:#fff;border:none;border-radius:6px;cursor:pointer}button:hover{background:#575757}#wrap{max-width:1280px;margin:0 auto;padding:20px}h1{font-size:18px;margin:6px 0 14px;color:#ddd;display:flex;align-items:center;gap:6px}#siteIco{width:18px;height:18px;border-radius:4px;box-shadow:0 0 0 1px rgba(0,0,0,0.45);background:#020617}#grid{display:grid;grid-template-columns:minmax(220px,300px) 1fr;gap:24px;align-items:start}#stats{grid-column:1 / -1}#stats .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:10px}#stats .card{background:#20252f;border:1px solid #2b364a;border-radius:10px;padding:12px;color:#cfe0ff}#stats .card h3{margin:0 0 8px;font-size:13px;color:#eaf2ff}#stats .kv{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 16px;font-size:13px;line-height:1.35}#stats .kvRow{display:flex;flex-direction:column}.statLabel{font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:#9ca3af;margin-bottom:1px}.statValue{font-size:15px;font-weight:600;color:#e5e7eb}.statValue small{font-size:11px;font-weight:400;color:#9ca3af;margin-left:4px}.statValue.warn{color:#facc15}.statValue.bad{color:#f97316}.statValue.error{color:#ef4444}.statClick{background:none;border:none;padding:0;margin:0;font:inherit;color:inherit;cursor:pointer;text-align:left}.statClick:hover{text-decoration:underline}.slugStrip{margin-top:4px;padding-top:6px;border-top:1px solid #1f2937;font-size:12px}.slugChipRow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:3px}.slugChipLabel{font-size:11px;color:#9ca3af;text-transform:uppercase;letter-spacing:0.06em;margin-right:4px}.slugWord{background:#111827;border:1px solid #374151;color:#eaf2ff;cursor:pointer;padding:2px 7px;border-radius:999px;font:inherit;text-decoration:none;display:inline-block}.slugWord:hover{background:#1f2937;border-color:#60a5fa}.slugCount{font-size:10px;color:#a9c3ff;margin-left:3px}.timeRange{display:flex;gap:16px;margin-bottom:10px;flex-wrap:wrap}.timeBox{flex:1 1 0;min-width:120px;padding:8px;border-radius:8px;background:#1b2332;border:1px solid #2b364a}.timeFresh{display:flex;flex-direction:column;gap:6px;margin-top:4px;font-size:12px}.timeRow{display:flex;align-items:center;gap:8px;justify-content:space-between;cursor:pointer}.timeRow span{color:#d1d5db}.timeRow:hover span{color:#e5e7eb}.miniBar{flex:1 1 auto;display:flex;align-items:center;gap:6px}.miniBarTrack{position:relative;flex:1 1 auto;height:8px;border-radius:999px;background:#111827;overflow:hidden}.miniBarTrack i{display:block;height:100%;background:#58c49a}.miniBarVal{font-size:11px;color:#9ca3af;white-space:nowrap}.timeRisk{display:flex;flex-direction:column;gap:4px;margin:10px 0 0;font-size:12px}.timeNote{color:#9ca3af;font-size:11px}.timeList{display:flex;flex-wrap:wrap;gap:4px;font-size:11px;color:#d1d5db;margin-top:2px}.riskChip{padding:2px 7px;font-size:11px;border-radius:999px;background:#111827;border:1px solid #4b5563;color:#e5e7eb;cursor:pointer}.riskChip:hover{background:#1f2937;border-color:#9ca3af}.yearFilter{margin-top:8px;display:flex;flex-direction:column;gap:4px}.yearChips{display:flex;flex-wrap:wrap;gap:6px}.yearChip{padding:4px 8px;font-size:11px;border-radius:999px;background:#111827;border:1px solid #4b5563;color:#e5e7eb;cursor:pointer}.yearChip:hover{background:#1f2937;border-color:#9ca3af}.yearChipCount{font-size:10px;color:#9ca3af;margin-left:2px}#depthList{list-style:none;padding:0;margin:6px 0 0;display:flex;gap:10px;flex-wrap:wrap}#depthList li{display:flex;align-items:center;gap:6px}.depthBtn{padding:6px 10px;border-radius:6px;border:1px solid transparent;transition:background .15s ease,border-color .15s ease,color .15s ease}.depthBtn.green{background:#2f5a46;border-color:#58c49a;color:#eafff7}.depthBtn.green:hover{background:#3a6e57}.depthBtn.orange{background:#6e5324;border-color:#d6ad5c;color:#fff6e7}.depthBtn.orange:hover{background:#876733}.depthMeta{color:#a9c3ff}.thinChip{padding:2px 7px;font-size:11px;border-radius:999px;background:#111827;border:1px solid #4b5563;color:#e5e7eb;cursor:pointer;margin-left:4px}.thinChip:hover{background:#1f2937;border-color:#9ca3af}#cats{background:#232323;border:1px solid #2e2e2e;border-radius:12px;padding:14px}#cats .catsHead{margin-bottom:8px}#cats .catsTitle{font-weight:600;font-size:13px;margin-bottom:2px}#cats .catsSub{font-size:12px;color:#9ca3af;max-width:520px}#catChips{margin:6px 0 8px;display:flex;flex-wrap:wrap;gap:6px}.catChip{padding:4px 9px;font-size:12px;border-radius:999px;background:#1f2933;border:1px solid #374151;color:#e5e7eb;cursor:pointer}.catChip:hover{background:#111827;border-color:#4b5563}#catRows{margin-top:6px}#catRows .row{padding:8px 10px;margin:6px 0;cursor:pointer;display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto auto;align-items:center;gap:4px;border-radius:10px;border:1px solid #4b5563;background:radial-gradient(circle at top left,#111827,#020617);box-shadow:0 4px 10px rgba(0,0,0,0.45);transition:background .15s ease,border-color .15s ease,transform .05s ease,box-shadow .1s ease}#catRows .row:hover{background:radial-gradient(circle at top left,#1f2937,#020617);border-color:#60a5fa;transform:translateY(-1px);box-shadow:0 6px 16px rgba(15,23,42,0.8)}#catRows .rowActive{background:radial-gradient(circle at top left,#1e293b,#020617);border-color:#93c5fd;box-shadow:0 0 0 1px #60a5fa,0 6px 16px rgba(15,23,42,0.9)}#catRows .leftcell{grid-column:1;grid-row:1;display:flex;align-items:center;gap:6px}#catRows .lbl{font-weight:600}#catRows .row:hover .lbl,#catRows .rowActive .lbl{color:#e5f2ff}#catRows .row.subrow .lbl{font-weight:400}#catRows .meta{grid-column:2;grid-row:1;color:#e5e7eb;text-align:right;white-space:nowrap;font-size:13px}#catRows .dates{grid-column:1 / -1;grid-row:2;color:#a9cff;font-size:12px;opacity:.95}#catRows .bar{grid-column:1 / -1;grid-row:3;height:8px;background:#333;border-radius:999px;overflow:hidden;margin-top:2px}#catRows .bar>i{display:block;height:100%;background:#58c49a}#catRows .subrow{margin-left:15px;background:rgba(255,255,255,0.03);border-left:3px solid #4b5563}#catRows .caret{display:inline-flex;width:14px;justify-content:center;align-items:center;font-size:11px;color:#9ca3af}#catRows .caret::before{content:\"›\";font-weight:bold}#list{background:#232323;border:1px solid #2e2e2e;border-radius:12px;padding:14px;min-height:200px}#listHeader{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px}#listActions{display:flex;gap:6px;align-items:center}#listActions button{padding:4px 8px;font-size:11px;border-radius:999px}#sortControls{display:flex;gap:4px;margin-right:4px}#count{margin:0;color:#bbb;font-weight:600;font-size:13px}ul{list-style:square;padding-left:18px;margin:10px 0 0}li{margin:7px 0;line-height:1.28}a{color:#fff;text-decoration:none;border:0}a:hover{text-decoration:none;border:0}#l{list-style:none;padding-left:0;margin:10px 0 0}#l li{position:relative;display:flex;justify-content:space-between;align-items:flex-start;gap:6px;margin:11px 0;line-height:1.32}#l li::before{content:\"■\";font-size:7px;color:#6b7280;margin-top:4px;flex:0 0 auto}#l li a{flex:1 1 auto;min-width:0}.urlDate{flex:0 0 auto;font-size:11px;color:#9ca3af;white-space:nowrap;margin-left:6px}.urlOldTag{color:#f97316;font-weight:600;margin-left:4px}.urlStatus{font-size:11px;margin-left:6px;padding:2px 6px;border-radius:999px;border:1px solid #4b5563;color:#e5e7eb;background:#111827}.urlStatus.ok{border-color:#22c55e;color:#bbf7d0;background:#14532d}.urlStatus.notfound{border-color:#ef4444;color:#fee2e2;background:#7f1d1d}.urlStatus.redirect{border-color:#eab308;color:#fef9c3;background:#713f12}.urlStatus.other{border-color:#6b7280;color:#e5e7eb;background:#111827}.urlStatus.err{border-color:#ef4444;color:#fee2e2;background:#7f1d1d}.hint{color:#9a9a9a;font-size:12px;margin:8px 0 0}</style></head><body><div id=\"top\"><div id=\"topInner\"><button id=\"closeBtn\">Stäng</button><button id=\"resetBtn\">Rensa</button><input id=\"k\" placeholder=\"Sök (blanksteg = OCH)\"><button id=\"reportBtn\" type=\"button\">Rapport</button></div></div><div id=\"wrap\"><h1><img id=\"siteIco\" src=\"' + siteFavicon + '\" alt=\"\"> Sitemap</h1><div id=\"grid\"><div id=\"stats\"><div class=\"cards\"><div class=\"card\"><h3>Översikt</h3><div class=\"kv\"><div class=\"kvRow\"><span class=\"statLabel\">Totalt antal URL</span><span class=\"statValue\">' + TOTAL + '<small>st</small></span></div><div class=\"kvRow\"><span class=\"statLabel\">Mappar (nivå 1)</span><span class=\"statValue\">' + folders.length + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Sajtens djup</span><span class=\"' + depthClass + '\">' + maxDepth + '<small>nivåer</small></span></div><div class=\"kvRow\"><span class=\"statLabel\">Saknar &lt;lastmod&gt;</span>' + missHtml + '</div><div class=\"kvRow\"><span class=\"statLabel\">URL med parametrar</span>' + paramHtml + '</div><div class=\"kvRow\"><span class=\"statLabel\">Ofullständiga URL</span>' + invalidHtml + '</div><div class=\"kvRow\"><span class=\"statLabel\">Bilder i sitemap</span>' + imgHtml + '</div><div class=\"kvRow\"><span class=\"statLabel\">PDF i sitemap</span>' + pdfHtml + '</div><div class=\"kvRow\"><span class=\"statLabel\">Tunna mappar (1 URL)</span><span class=\"' + thinClass + '\">' + thinFolders.length + '<small> st</small>' + (thinChipsHtml ? ' ' + thinChipsHtml : '') + '</span></div>' + langLine + '</div></div><div class=\"card\"><h3>Aktualitet</h3><div class=\"timeRange\"><div class=\"timeBox\"><div class=\"statLabel\">Äldsta URL</div><div class=\"statValue\">' + fmt(globalOld || null) + '</div></div><div class=\"timeBox\"><div class=\"statLabel\">Nyaste URL</div><div class=\"statValue\">' + fmt(globalNew || null) + '</div></div></div><div class=\"timeFresh\"><div class=\"timeRow\" data-range=\"30\"><span>Senaste 30 d</span><div class=\"miniBar\"><div class=\"miniBarTrack\"><i style=\"width:' + pct(n30, validDates.length) + '%\"></i></div><div class=\"miniBarVal\">' + n30 + ' (' + pct(n30, validDates.length) + '%)</div></div></div><div class=\"timeRow\" data-range=\"90\"><span>Senaste 90 d</span><div class=\"miniBar\"><div class=\"miniBarTrack\"><i style=\"width:' + pct(n90, validDates.length) + '%\"></i></div><div class=\"miniBarVal\">' + n90 + ' (' + pct(n90, validDates.length) + '%)</div></div></div><div class=\"timeRow\" data-range=\"365\"><span>Senaste 365 d</span><div class=\"miniBar\"><div class=\"miniBarTrack\"><i style=\"width:' + pct(n365, validDates.length) + '%\"></i></div><div class=\"miniBarVal\">' + n365 + ' (' + pct(n365, validDates.length) + '%)</div></div></div><div class=\"timeRow\" data-range=\"old3\"><span>Äldre än 3 år</span><div class=\"miniBar\"><div class=\"miniBarTrack\"><i style=\"width:' + pct(old3Count, validDates.length) + '%\"></i></div><div class=\"miniBarVal\">' + old3Count + ' (' + pct(old3Count, validDates.length) + '%)</div></div></div></div>' + riskBlock + yearsHtml + '</div><div class=\"card\"><h3>Validator</h3><div class=\"kv\"><div class=\"kvRow\"><span class=\"statLabel\">XML-status</span><span class=\"' + parseStatusClass + '\">' + parseStatusText + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Rot-element</span><span class=\"' + rootTypeClass + '\">' + escQ(rootTypeText) + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Namespace</span><span class=\"' + nsClass + '\">' + nsText + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Blandade url/sitemap</span><span class=\"statValue' + (mixedType ? ' warn' : '') + '\">' + (mixedType ? 'Ja' : 'Nej') + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Ogiltiga &lt;lastmod&gt;</span><span class=\"' + invalidLmClass + '\">' + invalidLmText + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Noder utan &lt;loc&gt;</span><span class=\"' + missingLocClass + '\">' + missingLocText + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Dubbletter av URL</span><span class=\"' + dupClass + '\">' + dupText + '</span></div></div></div></div><div class=\"slugStrip\"><div class=\"statLabel\">Slug-analys</div><div class=\"slugChipRow\"><span class=\"slugChipLabel\">Enord</span><span id=\"slugWords\"></span></div><div class=\"slugChipRow\"><span class=\"slugChipLabel\" id=\"slugBigLabel\">Tvåord</span><span id=\"slugBigrams\"></span></div></div><div class=\"card\" style=\"background:#20252f;border:1px solid #2b364a;border-radius:10px;padding:12px;color:#cfe0ff;margin-top:10px;\"><h3>Djupfördelning</h3><ul id=\"depthList\">' + depthLis + '</ul></div></div><div id=\"cats\"><div class=\"catsHead\"><div class=\"catsTitle\">Struktur &amp; kategorier</div><div class=\"catsSub\">Klicka på kort, chip eller nivå för att filtrera URL-listan.</div></div><div id=\"catChips\">' + chipsHtml + '</div><div id=\"catRows\" style=\"margin-top:6px\">' + rows + '</div><div class=\"hint\">Hela kortet är klickbart. Underkategorier är indragna med markerad vänsterkant.</div></div><div id=\"list\"><div id=\"listHeader\"><div id=\"count\">0 / ' + TOTAL + ' URL:er visas</div><div id=\"listActions\"><div id=\"sortControls\"><button id=\"sortDefaultBtn\" type=\"button\">Standard</button><button id=\"sortDateBtn\" type=\"button\">Datum</button><button id=\"sortNameBtn\" type=\"button\">Namn</button></div><button id=\"copyBtn\" type=\"button\">Kopiera</button><button id=\"downloadBtn\" type=\"button\">Ladda ner (CSV)</button><button id=\"statusBtn\" type=\"button\">Statuskoll</button></div></div><ul id=\"l\">' + items + '</ul></div></div></div></body></html>';
+        
+        // NY HTML-STRÄNG MED KRYSSRUTA I TOPPEN
+        var html = '<!doctype html><html><head><meta charset="utf-8"><title>Sitemap-vy</title><link rel="icon" href="' + siteFavicon + '"><style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#1f1f1f;color:#fff;margin:0}#top{position:sticky;top:0;background:#111827;border-bottom:1px solid #2c2c2c;z-index:3}#topInner{max-width:1280px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:10px;justify-content:center}#k{width:min(1100px,80vw);padding:12px 16px;border-radius:999px;border:1px solid #4b5563;background:#020617;color:#fff;font-size:16px;outline:none;box-shadow:0 0 0 1px #020617,0 0 0 3px rgba(148,163,184,0.35)}#k:focus{box-shadow:0 0 0 1px #0f172a,0 0 0 5px rgba(56,189,248,0.35);border-color:#60a5fa;background:#020617}button{padding:6px 10px;background:#3b3b3b;color:#fff;border:none;border-radius:6px;cursor:pointer}button:hover{background:#575757}#wrap{max-width:1280px;margin:0 auto;padding:20px}h1{font-size:18px;margin:6px 0 14px;color:#ddd;display:flex;align-items:center;gap:6px}#siteIco{width:18px;height:18px;border-radius:4px;box-shadow:0 0 0 1px rgba(0,0,0,0.45);background:#020617}#grid{display:grid;grid-template-columns:minmax(220px,300px) 1fr;gap:24px;align-items:start}#stats{grid-column:1 / -1}#stats .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:10px}#stats .card{background:#20252f;border:1px solid #2b364a;border-radius:10px;padding:12px;color:#cfe0ff}#stats .card h3{margin:0 0 8px;font-size:13px;color:#eaf2ff}#stats .kv{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 16px;font-size:13px;line-height:1.35}#stats .kvRow{display:flex;flex-direction:column}.statLabel{font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:#9ca3af;margin-bottom:1px}.statValue{font-size:15px;font-weight:600;color:#e5e7eb}.statValue small{font-size:11px;font-weight:400;color:#9ca3af;margin-left:4px}.statValue.warn{color:#facc15}.statValue.bad{color:#f97316}.statValue.error{color:#ef4444}.statClick{background:none;border:none;padding:0;margin:0;font:inherit;color:inherit;cursor:pointer;text-align:left}.statClick:hover{text-decoration:underline}.slugStrip{margin-top:4px;padding-top:6px;border-top:1px solid #1f2937;font-size:12px}.slugChipRow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:3px}.slugChipLabel{font-size:11px;color:#9ca3af;text-transform:uppercase;letter-spacing:0.06em;margin-right:4px}.slugWord{background:#111827;border:1px solid #374151;color:#eaf2ff;cursor:pointer;padding:2px 7px;border-radius:999px;font:inherit;text-decoration:none;display:inline-block}.slugWord:hover{background:#1f2937;border-color:#60a5fa}.slugCount{font-size:10px;color:#a9c3ff;margin-left:3px}.timeRange{display:flex;gap:16px;margin-bottom:10px;flex-wrap:wrap}.timeBox{flex:1 1 0;min-width:120px;padding:8px;border-radius:8px;background:#1b2332;border:1px solid #2b364a}.timeFresh{display:flex;flex-direction:column;gap:6px;margin-top:4px;font-size:12px}.timeRow{display:flex;align-items:center;gap:8px;justify-content:space-between;cursor:pointer}.timeRow span{color:#d1d5db}.timeRow:hover span{color:#e5e7eb}.miniBar{flex:1 1 auto;display:flex;align-items:center;gap:6px}.miniBarTrack{position:relative;flex:1 1 auto;height:8px;border-radius:999px;background:#111827;overflow:hidden}.miniBarTrack i{display:block;height:100%;background:#58c49a}.miniBarVal{font-size:11px;color:#9ca3af;white-space:nowrap}.timeRisk{display:flex;flex-direction:column;gap:4px;margin:10px 0 0;font-size:12px}.timeNote{color:#9ca3af;font-size:11px}.timeList{display:flex;flex-wrap:wrap;gap:4px;font-size:11px;color:#d1d5db;margin-top:2px}.riskChip{padding:2px 7px;font-size:11px;border-radius:999px;background:#111827;border:1px solid #4b5563;color:#e5e7eb;cursor:pointer}.riskChip:hover{background:#1f2937;border-color:#9ca3af}.yearFilter{margin-top:8px;display:flex;flex-direction:column;gap:4px}.yearChips{display:flex;flex-wrap:wrap;gap:6px}.yearChip{padding:4px 8px;font-size:11px;border-radius:999px;background:#111827;border:1px solid #4b5563;color:#e5e7eb;cursor:pointer}.yearChip:hover{background:#1f2937;border-color:#9ca3af}.yearChipCount{font-size:10px;color:#9ca3af;margin-left:2px}#depthList{list-style:none;padding:0;margin:6px 0 0;display:flex;gap:10px;flex-wrap:wrap}#depthList li{display:flex;align-items:center;gap:6px}.depthBtn{padding:6px 10px;border-radius:6px;border:1px solid transparent;transition:background .15s ease,border-color .15s ease,color .15s ease}.depthBtn.green{background:#2f5a46;border-color:#58c49a;color:#eafff7}.depthBtn.green:hover{background:#3a6e57}.depthBtn.orange{background:#6e5324;border-color:#d6ad5c;color:#fff6e7}.depthBtn.orange:hover{background:#876733}.depthMeta{color:#a9c3ff}.thinChip{padding:2px 7px;font-size:11px;border-radius:999px;background:#111827;border:1px solid #4b5563;color:#e5e7eb;cursor:pointer;margin-left:4px}.thinChip:hover{background:#1f2937;border-color:#9ca3af}#cats{background:#232323;border:1px solid #2e2e2e;border-radius:12px;padding:14px}#cats .catsHead{margin-bottom:8px}#cats .catsTitle{font-weight:600;font-size:13px;margin-bottom:2px}#cats .catsSub{font-size:12px;color:#9ca3af;max-width:520px}#catChips{margin:6px 0 8px;display:flex;flex-wrap:wrap;gap:6px}.catChip{padding:4px 9px;font-size:12px;border-radius:999px;background:#1f2933;border:1px solid #374151;color:#e5e7eb;cursor:pointer}.catChip:hover{background:#111827;border-color:#4b5563}#catRows{margin-top:6px}#catRows .row{padding:8px 10px;margin:6px 0;cursor:pointer;display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto auto;align-items:center;gap:4px;border-radius:10px;border:1px solid #4b5563;background:radial-gradient(circle at top left,#111827,#020617);box-shadow:0 4px 10px rgba(0,0,0,0.45);transition:background .15s ease,border-color .15s ease,transform .05s ease,box-shadow .1s ease}#catRows .row:hover{background:radial-gradient(circle at top left,#1f2937,#020617);border-color:#60a5fa;transform:translateY(-1px);box-shadow:0 6px 16px rgba(15,23,42,0.8)}#catRows .rowActive{background:radial-gradient(circle at top left,#1e293b,#020617);border-color:#93c5fd;box-shadow:0 0 0 1px #60a5fa,0 6px 16px rgba(15,23,42,0.9)}#catRows .leftcell{grid-column:1;grid-row:1;display:flex;align-items:center;gap:6px}#catRows .lbl{font-weight:600}#catRows .row:hover .lbl,#catRows .rowActive .lbl{color:#e5f2ff}#catRows .row.subrow .lbl{font-weight:400}#catRows .meta{grid-column:2;grid-row:1;color:#e5e7eb;text-align:right;white-space:nowrap;font-size:13px}#catRows .dates{grid-column:1 / -1;grid-row:2;color:#a9cff;font-size:12px;opacity:.95}#catRows .bar{grid-column:1 / -1;grid-row:3;height:8px;background:#333;border-radius:999px;overflow:hidden;margin-top:2px}#catRows .bar>i{display:block;height:100%;background:#58c49a}#catRows .subrow{margin-left:15px;background:rgba(255,255,255,0.03);border-left:3px solid #4b5563}#catRows .caret{display:inline-flex;width:14px;justify-content:center;align-items:center;font-size:11px;color:#9ca3af}#catRows .caret::before{content:\"›\";font-weight:bold}#list{background:#232323;border:1px solid #2e2e2e;border-radius:12px;padding:14px;min-height:200px}#listHeader{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px}#listActions{display:flex;gap:6px;align-items:center}#listActions button{padding:4px 8px;font-size:11px;border-radius:999px}#sortControls{display:flex;gap:4px;margin-right:4px}#count{margin:0;color:#bbb;font-weight:600;font-size:13px}ul{list-style:square;padding-left:18px;margin:10px 0 0}li{margin:7px 0;line-height:1.28}a{color:#fff;text-decoration:none;border:0}a:hover{text-decoration:none;border:0}#l{list-style:none;padding-left:0;margin:10px 0 0}#l li{position:relative;display:flex;justify-content:space-between;align-items:flex-start;gap:6px;margin:11px 0;line-height:1.32}#l li::before{content:\"■\";font-size:7px;color:#6b7280;margin-top:4px;flex:0 0 auto}#l li a{flex:1 1 auto;min-width:0}.urlDate{flex:0 0 auto;font-size:11px;color:#9ca3af;white-space:nowrap;margin-left:6px}.urlOldTag{color:#f97316;font-weight:600;margin-left:4px}.urlStatus{font-size:11px;margin-left:6px;padding:2px 6px;border-radius:999px;border:1px solid #4b5563;color:#e5e7eb;background:#111827}.urlStatus.ok{border-color:#22c55e;color:#bbf7d0;background:#14532d}.urlStatus.notfound{border-color:#ef4444;color:#fee2e2;background:#7f1d1d}.urlStatus.redirect{border-color:#eab308;color:#fef9c3;background:#713f12}.urlStatus.other{border-color:#6b7280;color:#e5e7eb;background:#111827}.urlStatus.err{border-color:#ef4444;color:#fee2e2;background:#7f1d1d}.hint{color:#9a9a9a;font-size:12px;margin:8px 0 0}</style></head><body><div id=\"top\"><div id=\"topInner\"><button id=\"closeBtn\">Stäng</button><button id=\"resetBtn\">Rensa</button><input id=\"k\" placeholder=\"Sök (blanksteg = OCH)\"><label style=\"display:flex;align-items:center;gap:4px;font-size:12px;color:#9ca3af;\"><input type=\"checkbox\" id=\"multiFilterToggle\">Kombinera filter</label><button id=\"reportBtn\" type=\"button\">Rapport</button></div></div><div id=\"wrap\"><h1><img id=\"siteIco\" src=\"' + siteFavicon + '\" alt=\"\"> Sitemap</h1><div id=\"grid\"><div id=\"stats\"><div class=\"cards\"><div class=\"card\"><h3>Översikt</h3><div class=\"kv\"><div class=\"kvRow\"><span class=\"statLabel\">Totalt antal URL</span><span class=\"statValue\">' + TOTAL + '<small>st</small></span></div><div class=\"kvRow\"><span class=\"statLabel\">Mappar (nivå 1)</span><span class=\"statValue\">' + folders.length + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Sajtens djup</span><span class=\"' + depthClass + '\">' + maxDepth + '<small>nivåer</small></span></div><div class=\"kvRow\"><span class=\"statLabel\">Saknar &lt;lastmod&gt;</span>' + missHtml + '</div><div class=\"kvRow\"><span class=\"statLabel\">URL med parametrar</span>' + paramHtml + '</div><div class=\"kvRow\"><span class=\"statLabel\">Ofullständiga URL</span>' + invalidHtml + '</div><div class=\"kvRow\"><span class=\"statLabel\">Bilder i sitemap</span>' + imgHtml + '</div><div class=\"kvRow\"><span class=\"statLabel\">PDF i sitemap</span>' + pdfHtml + '</div><div class=\"kvRow\"><span class=\"statLabel\">Tunna mappar (1 URL)</span><span class=\"' + thinClass + '\">' + thinFolders.length + '<small> st</small>' + (thinChipsHtml ? ' ' + thinChipsHtml : '') + '</span></div>' + langLine + '</div></div><div class=\"card\"><h3>Aktualitet</h3><div class=\"timeRange\"><div class=\"timeBox\"><div class=\"statLabel\">Äldsta URL</div><div class=\"statValue\">' + fmt(globalOld || null) + '</div></div><div class=\"timeBox\"><div class=\"statLabel\">Nyaste URL</div><div class=\"statValue\">' + fmt(globalNew || null) + '</div></div></div><div class=\"timeFresh\"><div class=\"timeRow\" data-range=\"30\"><span>Senaste 30 d</span><div class=\"miniBar\"><div class=\"miniBarTrack\"><i style=\"width:' + pct(n30, validDates.length) + '%\"></i></div><div class=\"miniBarVal\">' + n30 + ' (' + pct(n30, validDates.length) + '%)</div></div></div><div class=\"timeRow\" data-range=\"90\"><span>Senaste 90 d</span><div class=\"miniBar\"><div class=\"miniBarTrack\"><i style=\"width:' + pct(n90, validDates.length) + '%\"></i></div><div class=\"miniBarVal\">' + n90 + ' (' + pct(n90, validDates.length) + '%)</div></div></div><div class=\"timeRow\" data-range=\"365\"><span>Senaste 365 d</span><div class=\"miniBar\"><div class=\"miniBarTrack\"><i style=\"width:' + pct(n365, validDates.length) + '%\"></i></div><div class=\"miniBarVal\">' + n365 + ' (' + pct(n365, validDates.length) + '%)</div></div></div><div class=\"timeRow\" data-range=\"old3\"><span>Äldre än 3 år</span><div class=\"miniBar\"><div class=\"miniBarTrack\"><i style=\"width:' + pct(old3Count, validDates.length) + '%\"></i></div><div class=\"miniBarVal\">' + old3Count + ' (' + pct(old3Count, validDates.length) + '%)</div></div></div></div>' + riskBlock + yearsHtml + '</div><div class=\"card\"><h3>Validator</h3><div class=\"kv\"><div class=\"kvRow\"><span class=\"statLabel\">XML-status</span><span class=\"' + parseStatusClass + '\">' + parseStatusText + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Rot-element</span><span class=\"' + rootTypeClass + '\">' + escQ(rootTypeText) + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Namespace</span><span class=\"' + nsClass + '\">' + nsText + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Blandade url/sitemap</span><span class=\"statValue' + (mixedType ? ' warn' : '') + '\">' + (mixedType ? 'Ja' : 'Nej') + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Ogiltiga &lt;lastmod&gt;</span><span class=\"' + invalidLmClass + '\">' + invalidLmText + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Noder utan &lt;loc&gt;</span><span class=\"' + missingLocClass + '\">' + missingLocText + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Dubbletter av URL</span><span class=\"' + dupClass + '\">' + dupText + '</span></div></div></div></div><div class=\"slugStrip\"><div class=\"statLabel\">Slug-analys</div><div class=\"slugChipRow\"><span class=\"slugChipLabel\">Enord</span><span id=\"slugWords\"></span></div><div class=\"slugChipRow\"><span class=\"slugChipLabel\" id=\"slugBigLabel\">Tvåord</span><span id=\"slugBigrams\"></span></div></div><div class=\"card\" style=\"background:#20252f;border:1px solid #2b364a;border-radius:10px;padding:12px;color:#cfe0ff;margin-top:10px;\"><h3>Djupfördelning</h3><ul id=\"depthList\">' + depthLis + '</ul></div></div><div id=\"cats\"><div class=\"catsHead\"><div class=\"catsTitle\">Struktur &amp; kategorier</div><div class=\"catsSub\">Klicka på kort, chip eller nivå för att filtrera URL-listan.</div></div><div id=\"catChips\">' + chipsHtml + '</div><div id=\"catRows\" style=\"margin-top:6px\">' + rows + '</div><div class=\"hint\">Hela kortet är klickbart. Underkategorier är indragna med markerad vänsterkant.</div></div><div id=\"list\"><div id=\"listHeader\"><div id=\"count\">0 / ' + TOTAL + ' URL:er visas</div><div id=\"listActions\"><div id=\"sortControls\"><button id=\"sortDefaultBtn\" type=\"button\">Standard</button><button id=\"sortDateBtn\" type=\"button\">Datum</button><button id=\"sortNameBtn\" type=\"button\">Namn</button></div><button id=\"copyBtn\" type=\"button\">Kopiera</button><button id=\"downloadBtn\" type=\"button\">Ladda ner (CSV)</button><button id=\"statusBtn\" type=\"button\">Statuskoll</button></div></div><ul id=\"l\">' + items + '</ul></div></div></div></body></html>';
         var w = open('', '_blank');
         if (!w) {
             E('Kunde inte öppna nytt fönster/flik');
@@ -907,9 +909,125 @@
         w.document.close();
         var doc = w.document;
 
+        // GLOBALA FILTER STATES
+        var activeFilters = {
+            search: '',
+            category: '', // L1
+            sub: '',      // L2
+            root: false,
+            depth: null,
+            range: null,  // Tidsålder
+            year: null,   // Årtal
+            stat: null    // T.ex. 'missingLastmod', 'params'
+        };
+        var multiFilterMode = false;
+
+
         function $(id) {
             return doc.getElementById(id)
         }
+
+        // --- CENTRAL FILTRERINGSLOGIK ---
+        function applyFilters() {
+            var lis = [].slice.call($('l').children);
+            var qWords = activeFilters.search ? activeFilters.search.toLowerCase().split(/\s+/).filter(Boolean) : [];
+
+            for (var i = 0; i < lis.length; i++) {
+                var li = lis[i];
+                var isMatch = true;
+                
+                // 1. Sökfilter (Måste matcha ALLA sökord)
+                if (qWords.length) {
+                    var txt = li.innerText.toLowerCase();
+                    for (var wIdx = 0; wIdx < qWords.length; wIdx++) {
+                        if (txt.indexOf(qWords[wIdx]) === -1) {
+                            isMatch = false;
+                            break;
+                        }
+                    }
+                }
+
+                // 2. Kategorifilter (L1/L2/Root)
+                if (isMatch) {
+                    if (activeFilters.root) {
+                        if (li.getAttribute('data-root') !== '1') isMatch = false;
+                    } else if (activeFilters.category) {
+                        if (li.getAttribute('data-l1') !== activeFilters.category) isMatch = false;
+                        
+                        if (isMatch && activeFilters.sub) {
+                            if (li.getAttribute('data-l2') !== activeFilters.sub) isMatch = false;
+                        }
+                    }
+                }
+                
+                // 3. Djupfilter
+                if (isMatch && activeFilters.depth !== null) {
+                    if (parseInt(li.getAttribute('data-depth') || '0', 10) !== activeFilters.depth) isMatch = false;
+                }
+
+                // 4. Åldersintervall (Range/TimeFresh)
+                if (isMatch && activeFilters.range) {
+                    var aStr = li.getAttribute('data-age');
+                    var age = aStr ? parseInt(aStr, 10) : NaN;
+                    var r = activeFilters.range;
+
+                    if (isNaN(age)) {
+                         isMatch = false;
+                    } else if (r === '30') {
+                        if (age > 30) isMatch = false;
+                    } else if (r === '90') {
+                        if (age > 90) isMatch = false;
+                    } else if (r === '365') {
+                        if (age > 365) isMatch = false;
+                    } else if (r === 'old3') {
+                        if (age <= 1095) isMatch = false;
+                    }
+                }
+                
+                // 5. Årtalsfilter
+                if (isMatch && activeFilters.year) {
+                    if (li.getAttribute('data-year') !== String(activeFilters.year)) isMatch = false;
+                }
+
+                // 6. Statistik/Metafilter (missingLastmod, params, invalid, img, pdf)
+                if (isMatch && activeFilters.stat) {
+                     var attr = '';
+                     var valToCheck = '';
+                     switch (activeFilters.stat) {
+                        case 'missingLastmod': attr = 'data-haslast'; valToCheck = '0'; break;
+                        case 'params': attr = 'data-param'; valToCheck = '1'; break;
+                        case 'invalid': attr = 'data-invalid'; valToCheck = '1'; break;
+                        case 'img': attr = 'data-img'; valToCheck = '1'; break;
+                        case 'pdf': attr = 'data-pdf'; valToCheck = '1'; break;
+                     }
+                     if (attr) {
+                         var val = li.getAttribute(attr) || '0';
+                         if (val !== valToCheck) isMatch = false;
+                     }
+                }
+                
+                li.style.display = isMatch ? '' : 'none';
+            }
+
+            refresh(); // Uppdatera räknare och slug-analys
+        }
+
+        function clearCategoryFilters(includeSearch) {
+             activeFilters.category = '';
+             activeFilters.sub = '';
+             activeFilters.root = false;
+             activeFilters.depth = null;
+             activeFilters.range = null;
+             activeFilters.year = null;
+             activeFilters.stat = null;
+             if (includeSearch !== true) {
+                 activeFilters.search = '';
+                 if ($('k')) $('k').value = '';
+             }
+        }
+
+        // SLUT CENTRAL FILTRERINGSLOGIK
+
         var icoEl = doc.getElementById('siteIco');
         if (icoEl) {
             icoEl.onerror = function() {
@@ -989,19 +1107,27 @@
             recomputeSlug()
         }
 
-        function showOnly(fn) {
-            var lis = [].slice.call($('l').children);
-            for (var i = 0; i < lis.length; i++) {
-                lis[i].style.display = fn(lis[i]) ? '' : 'none'
-            }
-            refresh()
-        }
-
         function clearActiveRows() {
             var rs = [].slice.call(doc.querySelectorAll('#catRows .row'));
             for (var i = 0; i < rs.length; i++) {
                 rs[i].classList.remove('rowActive')
             }
+            // Hantera aktiva färger för stat/djup/tid-knappar (borttagen om den inte är aktiv i activeFilters)
+            var activeElems = doc.querySelectorAll('.depthBtn[data-depth], .timeRow[data-range], .yearChip[data-year], .statClick[data-kind]');
+            activeElems.forEach(function(el) {
+                var isActive = false;
+                if (el.matches('.depthBtn') && activeFilters.depth !== null && parseInt(el.getAttribute('data-depth'), 10) === activeFilters.depth) isActive = true;
+                if (el.matches('.timeRow') && activeFilters.range === el.getAttribute('data-range')) isActive = true;
+                if (el.matches('.yearChip') && activeFilters.year === el.getAttribute('data-year')) isActive = true;
+                if (el.matches('.statClick') && activeFilters.stat === el.getAttribute('data-kind')) isActive = true;
+                
+                if (isActive) {
+                    el.classList.add('rowActive'); // Återanvänd rowActive för att markera klickade filter
+                } else {
+                    el.classList.remove('rowActive');
+                }
+            });
+
         }
 
         function collapseAllSubs() {
@@ -1010,370 +1136,119 @@
                 subs[i].style.display = 'none'
             }
         }
-
-        function filterRoot() {
-            showOnly(function(li) {
-                return li.getAttribute('data-root') === '1'
-            });
-            clearActiveRows();
-            var rs = [].slice.call(doc.querySelectorAll('#catRows .row[data-root=\"1\"]'));
-            if (rs[0]) rs[0].classList.add('rowActive')
-        }
-
-        function filterL1(cat) {
-            showOnly(function(li) {
-                return li.getAttribute('data-l1') === cat
-            });
-            clearActiveRows();
-            var rs = [].slice.call(doc.querySelectorAll('#catRows .row[data-l1=\"' + cat + '\"]'));
-            for (var i = 0; i < rs.length; i++) {
-                rs[i].classList.add('rowActive')
-            }
-        }
-
-        function filterSub(p, s) {
-            showOnly(function(li) {
-                return li.getAttribute('data-l1') === p && li.getAttribute('data-l2') === s
-            });
-            clearActiveRows();
-            var rs = [].slice.call(doc.querySelectorAll('#catRows .row.subrow[data-parent=\"' + p + '\"][data-sub=\"' + s + '\"]'));
-            for (var i = 0; i < rs.length; i++) {
-                rs[i].classList.add('rowActive')
-            }
-        }
-
-        function toggleSubsFor(cat) {
-            var subs = [].slice.call(doc.querySelectorAll('.subrow[data-parent=\"' + cat + '\"]')),
-                anyShown = false;
-            for (var i = 0; i < subs.length; i++) {
-                if (subs[i].style.display !== 'none') {
-                    anyShown = true;
-                    break
-                }
-            }
-            var show = !anyShown;
-            for (i = 0; i < subs.length; i++) {
-                subs[i].style.display = show ? '' : 'none'
-            }
-        }
-        if ($('resetBtn')) {
-            $('resetBtn').onclick = function() {
-                var lis = [].slice.call($('l').children);
-                for (var i = 0; i < lis.length; i++) {
-                    lis[i].style.display = ''
-                }
-                collapseAllSubs();
-                clearActiveRows();
-                if ($('k')) {
-                    $('k').value = ''
-                }
-                refresh()
-            }
-        }(function() {
-            var rb = $('reportBtn');
-            if (!rb) return;
-
-            function escH(s) {
-                return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;')
-            }
-
-            function pad(n) {
-                return ('0' + n).slice(-2)
-            }
-
-            function fmtISO(dt) {
-                if (!dt || isNaN(dt.getTime())) return '–';
-                return dt.getFullYear() + '-' + pad(dt.getMonth() + 1) + '-' + pad(dt.getDate())
-            }
-
-            function pct(n, d) {
-                return d ? Math.round(n / d * 1000) / 10 : 0
-            }
-
-            function activeLabel() {
-                var a = doc.querySelector('#catRows .rowActive .lbl');
-                return a ? (a.textContent || '').trim() : ''
-            }
-
-            function buildReport() {
-                var lis = visibleLis();
-                var total = lis.length;
-                var now = new Date();
-                var qEl = $('k');
-                var q = qEl ? (qEl.value || '').trim() : '';
-                var act = activeLabel();
-                var missing = 0,
-                    params = 0,
-                    invalid = 0,
-                    img = 0,
-                    pdf = 0;
-                var depthCounts = {},
-                    maxDepth = 0,
-                    yearCounts = {},
-                    folderCounts = {},
-                    langCounts = {};
-                var oldestAge = -1,
-                    newestAge = 1e9;
-                var n30 = 0,
-                    n90 = 0,
-                    n365 = 0,
-                    old3 = 0;
-                var dupMap = {},
-                    dupCount = 0;
-                var folderStats = {};
-                for (var i = 0; i < lis.length; i++) {
-                    var li = lis[i];
-                    var hasLast = li.getAttribute('data-haslast') === '1';
-                    var hasP = li.getAttribute('data-param') === '1';
-                    var inv = li.getAttribute('data-invalid') === '1';
-                    var isImg = li.getAttribute('data-img') === '1';
-                    var isPdf = li.getAttribute('data-pdf') === '1';
-                    var depth = parseInt(li.getAttribute('data-depth') || '0', 10) || 0;
-                    var year = li.getAttribute('data-year') || '';
-                    var l1 = li.getAttribute('data-l1') || '';
-                    var ageStr = li.getAttribute('data-age') || '';
-                    var age = ageStr ? parseInt(ageStr, 10) : NaN;
-                    var a = li.querySelector('a');
-                    var url = a ? (a.href || a.textContent || '') : (li.textContent || '');
-                    var key = (url || '').toLowerCase();
-                    if (key) {
-                        if (dupMap[key]) dupCount++;
-                        else dupMap[key] = 1
+        
+        // --- EVENT HANDLERS ---
+        
+        // Kryssruta för Kombinera filter
+        (function() {
+            var toggleEl = doc.getElementById('multiFilterToggle');
+            if (toggleEl) {
+                toggleEl.onchange = function() {
+                    multiFilterMode = toggleEl.checked;
+                    
+                    // Om vi stänger av multi-läge, rensa alla filter utom söktermen 
+                    // och det senast klickade filtret
+                    if (!multiFilterMode) {
+                         // Identifiera det senast aktiva filtret (vi måste köra applyFilters för att rensa UI korrekt)
+                        var tempFilters = Object.assign({}, activeFilters); 
+                        
+                        // Helt nollställa activeFilters (förutom search)
+                        var searchVal = activeFilters.search;
+                        clearCategoryFilters(false); // Rensa allt utom search
+                        activeFilters.search = searchVal;
+                        
+                        // Vi kan inte veta vilket filter som var "senast" utan mer sofistikerad loggning.
+                        // För enkelhetens skull: när man avmarkerar, rensa alla filter utom sök.
                     }
-                    if (!hasLast) missing++;
-                    if (hasP) params++;
-                    if (inv) invalid++;
-                    if (isImg) img++;
-                    if (isPdf) pdf++;
-                    if (depth) {
-                        depthCounts[depth] = (depthCounts[depth] || 0) + 1;
-                        if (depth > maxDepth) maxDepth = depth
-                    }
-                    if (year) {
-                        yearCounts[year] = (yearCounts[year] || 0) + 1
-                    }
-                    if (l1) {
-                        folderCounts[l1] = (folderCounts[l1] || 0) + 1;
-                        var lg = String(l1).toLowerCase();
-                        if (/^[a-z]{2}(?:-[a-z]{2})?$/i.test(lg)) langCounts[lg] = (langCounts[lg] || 0) + 1;
-                        if (!folderStats[l1]) folderStats[l1] = {
-                            total: 0,
-                            old: 0,
-                            deep: 0,
-                            noLast: 0
-                        };
-                        folderStats[l1].total++;
-                        if (!hasLast) folderStats[l1].noLast++;
-                        if (!isNaN(age)) {
-                            if (age > 1095) folderStats[l1].old++;
-                            if (depth >= 3) folderStats[l1].deep++
-                        }
-                    }
-                    if (!isNaN(age)) {
-                        if (age < newestAge) newestAge = age;
-                        if (age > oldestAge) oldestAge = age;
-                        if (age <= 30) n30++;
-                        if (age <= 90) n90++;
-                        if (age <= 365) n365++;
-                        if (age > 1095) old3++
-                    }
-                }
-                var oldestDt = oldestAge >= 0 ? new Date(Date.now() - oldestAge * 86400000) : null;
-                var newestDt = newestAge < 1e9 ? new Date(Date.now() - newestAge * 86400000) : null;
-                var folders = Object.keys(folderCounts).sort(function(a, b) {
-                    return folderCounts[b] - folderCounts[a]
-                });
-                var years = Object.keys(yearCounts).sort(function(a, b) {
-                    return b - a
-                });
-                var depths = Object.keys(depthCounts).map(function(x) {
-                    return +x
-                }).sort(function(a, b) {
-                    return a - b
-                });
-                var risk = [];
-
-                function isTimeBased(name) {
-                    var n = String(name || '').toLowerCase();
-                    return ['nyheter', 'news', 'blogg', 'blog', 'press', 'arkiv', 'updates', 'notiser', 'artiklar', 'aktuellt'].indexOf(n) !== -1
-                }
-                for (var f in folderStats) {
-                    if (!Object.prototype.hasOwnProperty.call(folderStats, f)) continue;
-                    var fs = folderStats[f];
-                    if (!fs || fs.total < 5) continue;
-                    var oldShare = fs.old / fs.total,
-                        deepShare = fs.deep / fs.total,
-                        noShare = fs.noLast / fs.total;
-                    if (isTimeBased(f)) {
-                        if (oldShare > 0.95 && fs.total > 30) risk.push(f)
-                    } else {
-                        if ((oldShare > 0.5 && deepShare > 0.5) || noShare > 0.5) risk.push(f)
-                    }
-                }
-                risk = risk.slice(0, 20);
-                var rowsFolders = folders.slice(0, 25).map(function(fn) {
-                    var c = folderCounts[fn] || 0;
-                    return '<tr><td>' + escH(fn) + '</td><td style="text-align:right">' + c + '</td><td style="text-align:right">' + pct(c, total) + '%</td></tr>'
-                }).join('');
-                var rowsDepth = depths.map(function(d) {
-                    var c = depthCounts[d] || 0;
-                    return '<tr><td>Nivå ' + d + '</td><td style="text-align:right">' + c + '</td><td style="text-align:right">' + pct(c, total) + '%</td></tr>'
-                }).join('');
-                var rowsYear = years.map(function(y) {
-                    var c = yearCounts[y] || 0;
-                    return '<tr><td>' + escH(y) + '</td><td style="text-align:right">' + c + '</td><td style="text-align:right">' + pct(c, total) + '%</td></tr>'
-                }).join('');
-                var langs = Object.keys(langCounts).sort();
-                var langLine = langs.length ? ('Språk (nivå 1): ' + langs.map(function(x) {
-                    return escH(x) + ' (' + langCounts[x] + ')'
-                }).join(', ')) : 'Språk (nivå 1): –';
-                var riskLine = risk.length ? risk.map(escH).join(', ') : '–';
-                var title = 'Sitemap-rapport';
-                var src = location.href;
-                var ts = now.getFullYear() + '-' + pad(now.getMonth() + 1) + '-' + pad(now.getDate()) + ' ' + pad(now.getHours()) + ':' + pad(now.getMinutes());
-                var html = '<!doctype html><html><head><meta charset="utf-8"><title>' + escH(title) + '</title><style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:0;background:#0b1020;color:#e5e7eb}#wrap{max-width:980px;margin:0 auto;padding:18px 16px 28px}h1{margin:0 0 8px;font-size:20px}p{margin:6px 0 0;color:#cbd5e1;font-size:13px;line-height:1.45}.card{background:#0f172a;border:1px solid #1f2a44;border-radius:12px;padding:12px 12px 10px;margin:12px 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.kv{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 14px;font-size:13px}.k{color:#93c5fd;font-size:11px;text-transform:uppercase;letter-spacing:.06em}.v{font-weight:700}table{width:100%;border-collapse:collapse;margin-top:6px;font-size:13px}th,td{padding:7px 8px;border-bottom:1px solid #1f2a44}th{color:#cbd5e1;font-size:11px;text-transform:uppercase;letter-spacing:.06em;text-align:left}small{color:#94a3b8;font-weight:500}#meta{color:#94a3b8}</style></head><body><div id="wrap"><h1>' + escH(title) + '</h1><p id="meta">Källa: <span style="color:#e5e7eb">' + escH(src) + '</span><br>Export: ' + escH(ts) + '<br>Filter: ' + (act ? ('Kategori: ' + escH(act) + '; ') : '') + (q ? ('Sök: “' + escH(q) + '”; ') : '') + 'Visar ' + total + ' URL av ' + TOTAL + '</p><div class="card"><div class="grid"><div class="kv"><div><div class="k">Synliga URL</div><div class="v">' + total + '</div></div><div><div class="k">Dubbletter (synliga)</div><div class="v">' + dupCount + '</div></div><div><div class="k">Saknar lastmod</div><div class="v">' + missing + ' <small>(' + pct(missing, total) + '%)</small></div></div><div><div class="k">Parametrar</div><div class="v">' + params + ' <small>(' + pct(params, total) + '%)</small></div></div><div><div class="k">Ofullständiga URL</div><div class="v">' + invalid + ' <small>(' + pct(invalid, total) + '%)</small></div></div><div><div class="k">Bilder / PDF</div><div class="v">' + img + ' / ' + pdf + '</div></div><div><div class="k">Djup (max)</div><div class="v">' + maxDepth + '</div></div><div><div class="k">Språk (nivå 1)</div><div class="v">' + escH(langs.length ? langs.join(', ') : '–') + '</div></div></div><div class="kv"><div><div class="k">Äldsta</div><div class="v">' + fmtISO(oldestDt) + '</div></div><div><div class="k">Nyaste</div><div class="v">' + fmtISO(newestDt) + '</div></div><div><div><div class="k">Senaste 30 d</div><div class="v">' + n30 + ' <small>(' + pct(n30, total) + '%)</small></div></div><div><div class="k">Senaste 90 d</div><div class="v">' + n90 + ' <small>(' + pct(n90, total) + '%)</small></div></div><div><div class="k">Senaste 365 d</div><div class="v">' + n365 + ' <small>(' + pct(n365, total) + '%)</small></div></div><div><div class="k">Äldre än 3 år</div><div class="v">' + old3 + ' <small>(' + pct(old3, total) + '%)</small></div></div><div><div class="k">Mög-kontroll</div><div class="v">' + escH(risk.length ? String(risk.length) : '0') + '</div></div><div><div class="k">Riskmappar</div><div class="v" style="font-weight:600">' + riskLine + '</div></div></div></div></div><div class="card"><div class="k">Mappar (nivå 1) – topp 25</div><table><thead><tr><th>Mapp</th><th style="text-align:right">Antal</th><th style="text-align:right">Andel</th></tr></thead><tbody>' + rowsFolders + '</tbody></table><p style="margin-top:8px">' + escH(langLine) + '</p></div><div class="card"><div class="k">Djupfördelning</div><table><thead><tr><th>Djup</th><th style="text-align:right">Antal</th><th style="text-align:right">Andel</th></tr></thead><tbody>' + rowsDepth + '</tbody></table></div><div class="card"><div class="k">År (lastmod) – synligt urval</div><table><thead><tr><th>År</th><th style="text-align:right">Antal</th><th style="text-align:right">Andel</th></tr></thead><tbody>' + rowsYear + '</tbody></table></div></div></body></html>';
-                return html
-            }
-            rb.onclick = function() {
-                try {
-                    var html = buildReport();
-                    var now = new Date();
-                    var fn = 'sitemap-rapport-' + now.getFullYear() + pad(now.getMonth() + 1) + pad(now.getDate()) + '-' + pad(now.getHours()) + pad(now.getMinutes()) + '.html';
-                    var blob = new Blob([html], {
-                        type: 'text/html;charset=utf-8'
-                    });
-                    var a = doc.createElement('a');
-                    a.href = URL.createObjectURL(blob);
-                    a.download = fn;
-                    doc.body.appendChild(a);
-                    a.click();
-                    setTimeout(function() {
-                        try {
-                            URL.revokeObjectURL(a.href)
-                        } catch (e) {}
-                        try {
-                            doc.body.removeChild(a)
-                        } catch (e) {}
-                    }, 0)
-                } catch (e) {
-                    alert('Kunde inte skapa rapport: ' + (e && e.message ? e.message : e))
-                }
+                    applyFilters();
+                };
             }
         })();
+
+
+        // Rensa alla filter
+        if ($('resetBtn')) {
+            $('resetBtn').onclick = function() {
+                // Återställ alla filter, inkl. sök
+                clearCategoryFilters(false);
+                
+                collapseAllSubs();
+                clearActiveRows();
+                
+                // Återställ kryssrutan
+                var toggleEl = doc.getElementById('multiFilterToggle');
+                if(toggleEl) toggleEl.checked = false;
+                multiFilterMode = false;
+                
+                applyFilters(); 
+            }
+        }
+
+        // Sökfält
         if ($('k')) {
             (function() {
-                var kEl = $('k'),
-                    listEls = [].slice.call($('l').children);
+                var kEl = $('k');
                 kEl.oninput = function() {
-                    var words = kEl.value.toLowerCase().split(/\s+/).filter(Boolean);
-                    for (var i = 0; i < listEls.length; i++) {
-                        var txt = listEls[i].innerText.toLowerCase(),
-                            ok = true;
-                        for (var wIdx = 0; wIdx < words.length; wIdx++) {
-                            if (txt.indexOf(words[wIdx]) === -1) {
-                                ok = false;
-                                break
-                            }
-                        }
-                        listEls[i].style.display = (words.length ? ok : true) ? '' : 'none'
-                    }
-                    clearActiveRows();
-                    refresh()
+                    activeFilters.search = kEl.value.trim(); 
+                    // clearActiveRows(); behövs inte här då sökning inte ändrar rad-status
+                    applyFilters();
                 }
             })()
-        }(function() {
+        }
+
+        // Djupfilter
+        (function() {
             var depthListEl = $('depthList');
             if (!depthListEl) return;
             depthListEl.addEventListener('click', function(ev) {
                 var btn = ev.target.closest('.depthBtn');
                 if (!btn) return;
+                
                 var d = parseInt(btn.getAttribute('data-depth') || '0', 10);
-                if (!d) return;
-                showOnly(function(li) {
-                    return parseInt(li.getAttribute('data-depth') || '0', 10) === d
-                });
-                clearActiveRows()
+                var isActive = activeFilters.depth === d;
+
+                if (!multiFilterMode && !isActive) {
+                    clearCategoryFilters(true);
+                }
+
+                if (isActive) {
+                    activeFilters.depth = null;
+                } else {
+                    activeFilters.depth = d;
+                }
+                
+                clearActiveRows();
+                applyFilters();
             })
         })();
+
+        // Åldersfilter (TimeFresh)
         (function() {
             var tf = doc.querySelector('.timeFresh');
             if (!tf) return;
             tf.addEventListener('click', function(ev) {
                 var row = ev.target.closest('.timeRow');
                 if (!row || !tf.contains(row)) return;
+                
                 var r = row.getAttribute('data-range') || '';
-                if (!r) return;
+                var isActive = activeFilters.range === r;
+
+                if (!multiFilterMode && !isActive) {
+                    clearCategoryFilters(true);
+                }
+                
+                if (isActive) {
+                    activeFilters.range = null;
+                } else {
+                    activeFilters.range = r;
+                }
+
                 clearActiveRows();
-                showOnly(function(li) {
-                    var aStr = li.getAttribute('data-age');
-                    if (!aStr) return false;
-                    var a = parseInt(aStr, 10);
-                    if (isNaN(a)) return false;
-                    if (r === '30') return a <= 30;
-                    if (r === '90') return a <= 90;
-                    if (r === '365') return a <= 365;
-                    if (r === 'old3') return a > 1095;
-                    return false
-                })
+                applyFilters();
             })
         })();
-        (function() {
-            var chips = doc.querySelectorAll('.catChip');
-            for (var i = 0; i < chips.length; i++) {
-                chips[i].addEventListener('click', function() {
-                    var cat = this.getAttribute('data-l1') || '';
-                    if (!cat) return;
-                    toggleSubsFor(cat);
-                    filterL1(cat)
-                })
-            }
-        })();
-        (function() {
-            var rchips = doc.querySelectorAll('.riskChip');
-            for (var i = 0; i < rchips.length; i++) {
-                rchips[i].addEventListener('click', function() {
-                    var cat = this.getAttribute('data-l1') || '';
-                    if (!cat) return;
-                    toggleSubsFor(cat);
-                    filterL1(cat)
-                })
-            }
-        })();
-        (function() {
-            var tchips = doc.querySelectorAll('.thinChip');
-            for (var i = 0; i < tchips.length; i++) {
-                tchips[i].addEventListener('click', function() {
-                    var cat = this.getAttribute('data-l1') || '';
-                    if (!cat) return;
-                    toggleSubsFor(cat);
-                    filterL1(cat)
-                })
-            }
-        })();
-        (function() {
-            var wrap = $('catRows');
-            if (!wrap) return;
-            wrap.addEventListener('click', function(ev) {
-                var row = ev.target.closest('.row');
-                if (!row || !wrap.contains(row)) return;
-                var isRoot = row.getAttribute('data-root') === '1',
-                    parent = row.getAttribute('data-parent'),
-                    sub = row.getAttribute('data-sub'),
-                    l1 = row.getAttribute('data-l1');
-                if (parent && sub) {
-                    filterSub(parent, sub);
-                    return
-                }
-                if (isRoot) {
-                    filterRoot();
-                    return
-                }
-                if (l1) {
-                    toggleSubsFor(l1);
-                    filterL1(l1)
-                }
-            })
-        })();
+        
+        // Årtalsfilter
         (function() {
             var stats = doc.querySelector('#stats');
             if (!stats) return;
@@ -1381,50 +1256,146 @@
                 var yBtn = ev.target.closest('.yearChip');
                 if (yBtn && stats.contains(yBtn)) {
                     var y = yBtn.getAttribute('data-year') || '';
+                    var isActive = activeFilters.year === y;
+                    
+                    if (!multiFilterMode && !isActive) {
+                        clearCategoryFilters(true);
+                    }
+                    
+                    if (isActive) {
+                        activeFilters.year = null;
+                    } else {
+                        activeFilters.year = y;
+                    }
+                    
                     clearActiveRows();
-                    if (!y) return;
-                    showOnly(function(li) {
-                        return (li.getAttribute('data-year') || '') === y
-                    });
-                    return
+                    applyFilters();
                 }
+                
+                // --- Statistik/Metafilter (missingLastmod, params, invalid, img, pdf) ---
                 var btn = ev.target.closest('.statClick');
                 if (!btn || !stats.contains(btn)) return;
+                
                 var kind = btn.getAttribute('data-kind') || '';
+                var isActiveStat = activeFilters.stat === kind;
+
+                if (!multiFilterMode && !isActiveStat) {
+                    clearCategoryFilters(true);
+                }
+                
+                if (isActiveStat) {
+                    activeFilters.stat = null;
+                } else {
+                    activeFilters.stat = kind;
+                }
+                
                 clearActiveRows();
-                if (!kind) return;
-                showOnly(function(li) {
-                    switch (kind) {
-                        case 'missingLastmod':
-                            return li.getAttribute('data-haslast') === '0';
-                        case 'params':
-                            return li.getAttribute('data-param') === '1';
-                        case 'invalid':
-                            return li.getAttribute('data-invalid') === '1';
-                        case 'img':
-                            return li.getAttribute('data-img') === '1';
-                        case 'pdf':
-                            return li.getAttribute('data-pdf') === '1';
-                        default:
-                            return true
-                    }
-                })
+                applyFilters();
             })
         })();
+
+
+        // Kategori-knappar (Chips)
+        (function() {
+            var chipHandlers = function(ev) {
+                var btn = ev.target.closest('[data-l1]');
+                if (!btn) return;
+                
+                var cat = btn.getAttribute('data-l1') || '';
+                var isActive = activeFilters.category === cat && !activeFilters.sub && !activeFilters.root;
+
+                if (!multiFilterMode && !isActive) {
+                    clearCategoryFilters(true);
+                    collapseAllSubs();
+                }
+
+                if (isActive) {
+                    activeFilters.category = '';
+                    activeFilters.sub = '';
+                    collapseAllSubs();
+                } else {
+                    activeFilters.category = cat;
+                    activeFilters.sub = '';
+                    activeFilters.root = false;
+                    toggleSubsFor(cat); // Behåll toggle-funktionaliteten
+                }
+                
+                clearActiveRows();
+                applyFilters();
+            };
+            
+            var chips = doc.querySelectorAll('.catChip, .riskChip, .thinChip');
+            chips.forEach(function(chip) { chip.addEventListener('click', chipHandlers); });
+        })();
+
+
+        // Kategori-rader (Rows)
+        (function() {
+            var wrap = $('catRows');
+            if (!wrap) return;
+            wrap.addEventListener('click', function(ev) {
+                var row = ev.target.closest('.row');
+                if (!row || !wrap.contains(row)) return;
+                
+                var isRoot = row.getAttribute('data-root') === '1',
+                    parent = row.getAttribute('data-parent'), // Endast för subrow
+                    sub = row.getAttribute('data-sub'),       // Endast för subrow
+                    l1 = row.getAttribute('data-l1');         // Endast för mainrow
+
+                var isActive = row.classList.contains('rowActive');
+
+                if (!multiFilterMode && !isActive) {
+                    clearCategoryFilters(true);
+                }
+                
+                // 1. Hantera toggle/rensa kategori
+                if (isActive) {
+                    // Avaktivera
+                    activeFilters.category = '';
+                    activeFilters.sub = '';
+                    activeFilters.root = false;
+                    
+                    // Om det är en huvudrad, kollapsa subrader
+                    if(l1) toggleSubsFor(l1); 
+
+                } else {
+                    // Aktivera
+                    activeFilters.category = l1 || '';
+                    activeFilters.sub = sub || '';
+                    activeFilters.root = isRoot;
+
+                    // Om det är en huvudrad, expandera subrader (görs bäst EFTER clearCategoryFilters)
+                    if(l1 && !parent) toggleSubsFor(l1);
+                }
+
+                // 2. Markering (Visuell feedback)
+                clearActiveRows();
+                if (!isActive) row.classList.add('rowActive');
+
+                // 3. Filtrera listan
+                applyFilters();
+            })
+        })();
+
+
+        // Sök-chips (Slug words)
         doc.addEventListener('click', function(ev) {
             var btn = ev.target.closest('.slugWord');
             if (!btn || !doc.body.contains(btn)) return;
             ev.preventDefault();
             var term = (btn.getAttribute('data-slug') || '').trim();
             var kEl = $('k');
+            
+            // Hanterar nu sökning i multi-läge eller enkel-läge
             if (kEl) {
+                activeFilters.search = term;
                 kEl.value = term;
-                if (typeof kEl.oninput === 'function') {
-                    kEl.oninput()
-                }
+                applyFilters();
                 kEl.focus()
             }
         });
+        
+        // --- DATA EXPORT & SORTING ---
         (function() {
             function getVisibleRows() {
                 var lis = visibleLis(),
@@ -1645,7 +1616,8 @@
                 }
             }
         })();
-        refresh()
+        
+        applyFilters(); // Initial körning
     }
     if (syntheticEl) {
         var txt = syntheticEl.value || syntheticEl.textContent || '';
