@@ -1122,13 +1122,7 @@
                 el.classList.remove('filterActive');
                 
                 // Måste hanteras annorlunda för timeRow eftersom den har span inuti
-                var targetEl = el.matches('.timeRow') ? el.querySelector('span') : el; 
-                if (!targetEl) targetEl = el;
-
-                // Hantera TimeRow's span inuti.
-                if (el.matches('.timeRow')) {
-                    el.classList.remove('filterActive');
-                }
+                var targetEl = el.matches('.timeRow') ? el : el; 
                 
                 var isCurrentlyActive = false;
                 
@@ -1341,7 +1335,7 @@
                 if (!btn) return;
                 
                 var cat = btn.getAttribute('data-l1') || '';
-                var isActive = activeFilters.category === cat && !activeFilters.sub && !activeFilters.root;
+                var isActive = btn.classList.contains('filterActive'); // Vi kollar den visuella markeringen här
 
                 if (!multiFilterMode && !isActive) {
                     clearCategoryFilters(true);
@@ -1357,7 +1351,7 @@
                     activeFilters.category = cat;
                     activeFilters.sub = '';
                     activeFilters.root = false;
-                    toggleSubsFor(cat); // Behåll toggle-funktionaliteten
+                    // Ingen toggleSubsFor här, eftersom det är chipsen.
                 }
                 
                 applyFilters();
@@ -1383,16 +1377,17 @@
 
                 var isActive = row.classList.contains('rowActive');
 
-                if (!multiFilterMode && !isActive) {
-                    clearCategoryFilters(true);
-                }
-                
-                // Hantera expandering/kollaps (görs oavsett filterläge)
+                // 1. Hantera expandering/kollaps AV subrader (görs endast på huvudrader)
                 if (l1 && !parent) {
                     toggleSubsFor(l1); 
                 }
 
-                // 1. Hantera toggle/rensa kategori
+                // 2. Hantera enkel-läge/nollställning
+                if (!multiFilterMode && !isActive) {
+                    clearCategoryFilters(true);
+                }
+                
+                // 3. Hantera toggle/sätta aktivt filter
                 if (isActive) {
                     // Avaktivera
                     activeFilters.category = '';
@@ -1405,7 +1400,7 @@
                     activeFilters.root = isRoot;
                 }
 
-                // 2. Filtrera listan (Visuell markering hanteras av applyFilters via clearActiveRows)
+                // 4. Filtrera listan
                 applyFilters();
             })
         })();
