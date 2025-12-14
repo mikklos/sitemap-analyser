@@ -898,8 +898,8 @@
         var pdfInner = '' + pdfCount;
         var pdfHtml = pdfCount > 0 ? '<button class="' + pdfClass + ' statClick" data-kind="pdf">' + pdfInner + '</button>' : '<span class="' + pdfClass + '">' + pdfInner + '</span>';
         
-        // NY HTML-STRÄNG MED KRYSSRUTA I TOPPEN
-        var html = '<!doctype html><html><head><meta charset="utf-8"><title>Sitemap-vy</title><link rel="icon" href="' + siteFavicon + '"><style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#1f1f1f;color:#fff;margin:0}#top{position:sticky;top:0;background:#111827;border-bottom:1px solid #2c2c2c;z-index:3}#topInner{max-width:1280px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:10px;justify-content:center}#k{width:min(1100px,80vw);padding:12px 16px;border-radius:999px;border:1px solid #4b5563;background:#020617;color:#fff;font-size:16px;outline:none;box-shadow:0 0 0 1px #020617,0 0 0 3px rgba(148,163,184,0.35)}#k:focus{box-shadow:0 0 0 1px #0f172a,0 0 0 5px rgba(56,189,248,0.35);border-color:#60a5fa;background:#020617}button{padding:6px 10px;background:#3b3b3b;color:#fff;border:none;border-radius:6px;cursor:pointer}button:hover{background:#575757}#wrap{max-width:1280px;margin:0 auto;padding:20px}h1{font-size:18px;margin:6px 0 14px;color:#ddd;display:flex;align-items:center;gap:6px}#siteIco{width:18px;height:18px;border-radius:4px;box-shadow:0 0 0 1px rgba(0,0,0,0.45);background:#020617}#grid{display:grid;grid-template-columns:minmax(220px,300px) 1fr;gap:24px;align-items:start}#stats{grid-column:1 / -1}#stats .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:10px}#stats .card{background:#20252f;border:1px solid #2b364a;border-radius:10px;padding:12px;color:#cfe0ff}#stats .card h3{margin:0 0 8px;font-size:13px;color:#eaf2ff}#stats .kv{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 16px;font-size:13px;line-height:1.35}#stats .kvRow{display:flex;flex-direction:column}.statLabel{font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:#9ca3af;margin-bottom:1px}.statValue{font-size:15px;font-weight:600;color:#e5e7eb}.statValue small{font-size:11px;font-weight:400;color:#9ca3af;margin-left:4px}.statValue.warn{color:#facc15}.statValue.bad{color:#f97316}.statValue.error{color:#ef4444}.statClick{background:none;border:none;padding:0;margin:0;font:inherit;color:inherit;cursor:pointer;text-align:left}.statClick:hover{text-decoration:underline}.slugStrip{margin-top:4px;padding-top:6px;border-top:1px solid #1f2937;font-size:12px}.slugChipRow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:3px}.slugChipLabel{font-size:11px;color:#9ca3af;text-transform:uppercase;letter-spacing:0.06em;margin-right:4px}.slugWord{background:#111827;border:1px solid #374151;color:#eaf2ff;cursor:pointer;padding:2px 7px;border-radius:999px;font:inherit;text-decoration:none;display:inline-block}.slugWord:hover{background:#1f2937;border-color:#60a5fa}.slugCount{font-size:10px;color:#a9c3ff;margin-left:3px}.timeRange{display:flex;gap:16px;margin-bottom:10px;flex-wrap:wrap}.timeBox{flex:1 1 0;min-width:120px;padding:8px;border-radius:8px;background:#1b2332;border:1px solid #2b364a}.timeFresh{display:flex;flex-direction:column;gap:6px;margin-top:4px;font-size:12px}.timeRow{display:flex;align-items:center;gap:8px;justify-content:space-between;cursor:pointer}.timeRow span{color:#d1d5db}.timeRow:hover span{color:#e5e7eb}.miniBar{flex:1 1 auto;display:flex;align-items:center;gap:6px}.miniBarTrack{position:relative;flex:1 1 auto;height:8px;border-radius:999px;background:#111827;overflow:hidden}.miniBarTrack i{display:block;height:100%;background:#58c49a}.miniBarVal{font-size:11px;color:#9ca3af;white-space:nowrap}.timeRisk{display:flex;flex-direction:column;gap:4px;margin:10px 0 0;font-size:12px}.timeNote{color:#9ca3af;font-size:11px}.timeList{display:flex;flex-wrap:wrap;gap:4px;font-size:11px;color:#d1d5db;margin-top:2px}.riskChip{padding:2px 7px;font-size:11px;border-radius:999px;background:#111827;border:1px solid #4b5563;color:#e5e7eb;cursor:pointer}.riskChip:hover{background:#1f2937;border-color:#9ca3af}.yearFilter{margin-top:8px;display:flex;flex-direction:column;gap:4px}.yearChips{display:flex;flex-wrap:wrap;gap:6px}.yearChip{padding:4px 8px;font-size:11px;border-radius:999px;background:#111827;border:1px solid #4b5563;color:#e5e7eb;cursor:pointer}.yearChip:hover{background:#1f2937;border-color:#9ca3af}.yearChipCount{font-size:10px;color:#9ca3af;margin-left:2px}#depthList{list-style:none;padding:0;margin:6px 0 0;display:flex;gap:10px;flex-wrap:wrap}#depthList li{display:flex;align-items:center;gap:6px}.depthBtn{padding:6px 10px;border-radius:6px;border:1px solid transparent;transition:background .15s ease,border-color .15s ease,color .15s ease}.depthBtn.green{background:#2f5a46;border-color:#58c49a;color:#eafff7}.depthBtn.green:hover{background:#3a6e57}.depthBtn.orange{background:#6e5324;border-color:#d6ad5c;color:#fff6e7}.depthBtn.orange:hover{background:#876733}.depthMeta{color:#a9c3ff}.thinChip{padding:2px 7px;font-size:11px;border-radius:999px;background:#111827;border:1px solid #4b5563;color:#e5e7eb;cursor:pointer;margin-left:4px}.thinChip:hover{background:#1f2937;border-color:#9ca3af}#cats{background:#232323;border:1px solid #2e2e2e;border-radius:12px;padding:14px}#cats .catsHead{margin-bottom:8px}#cats .catsTitle{font-weight:600;font-size:13px;margin-bottom:2px}#cats .catsSub{font-size:12px;color:#9ca3af;max-width:520px}#catChips{margin:6px 0 8px;display:flex;flex-wrap:wrap;gap:6px}.catChip{padding:4px 9px;font-size:12px;border-radius:999px;background:#1f2933;border:1px solid #374151;color:#e5e7eb;cursor:pointer}.catChip:hover{background:#111827;border-color:#4b5563}#catRows{margin-top:6px}#catRows .row{padding:8px 10px;margin:6px 0;cursor:pointer;display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto auto;align-items:center;gap:4px;border-radius:10px;border:1px solid #4b5563;background:radial-gradient(circle at top left,#111827,#020617);box-shadow:0 4px 10px rgba(0,0,0,0.45);transition:background .15s ease,border-color .15s ease,transform .05s ease,box-shadow .1s ease}#catRows .row:hover{background:radial-gradient(circle at top left,#1f2937,#020617);border-color:#60a5fa;transform:translateY(-1px);box-shadow:0 6px 16px rgba(15,23,42,0.8)}#catRows .rowActive{background:radial-gradient(circle at top left,#1e293b,#020617);border-color:#93c5fd;box-shadow:0 0 0 1px #60a5fa,0 6px 16px rgba(15,23,42,0.9)}#catRows .leftcell{grid-column:1;grid-row:1;display:flex;align-items:center;gap:6px}#catRows .lbl{font-weight:600}#catRows .row:hover .lbl,#catRows .rowActive .lbl{color:#e5f2ff}#catRows .row.subrow .lbl{font-weight:400}#catRows .meta{grid-column:2;grid-row:1;color:#e5e7eb;text-align:right;white-space:nowrap;font-size:13px}#catRows .dates{grid-column:1 / -1;grid-row:2;color:#a9cff;font-size:12px;opacity:.95}#catRows .bar{grid-column:1 / -1;grid-row:3;height:8px;background:#333;border-radius:999px;overflow:hidden;margin-top:2px}#catRows .bar>i{display:block;height:100%;background:#58c49a}#catRows .subrow{margin-left:15px;background:rgba(255,255,255,0.03);border-left:3px solid #4b5563}#catRows .caret{display:inline-flex;width:14px;justify-content:center;align-items:center;font-size:11px;color:#9ca3af}#catRows .caret::before{content:\"›\";font-weight:bold}#list{background:#232323;border:1px solid #2e2e2e;border-radius:12px;padding:14px;min-height:200px}#listHeader{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px}#listActions{display:flex;gap:6px;align-items:center}#listActions button{padding:4px 8px;font-size:11px;border-radius:999px}#sortControls{display:flex;gap:4px;margin-right:4px}#count{margin:0;color:#bbb;font-weight:600;font-size:13px}ul{list-style:square;padding-left:18px;margin:10px 0 0}li{margin:7px 0;line-height:1.28}a{color:#fff;text-decoration:none;border:0}a:hover{text-decoration:none;border:0}#l{list-style:none;padding-left:0;margin:10px 0 0}#l li{position:relative;display:flex;justify-content:space-between;align-items:flex-start;gap:6px;margin:11px 0;line-height:1.32}#l li::before{content:\"■\";font-size:7px;color:#6b7280;margin-top:4px;flex:0 0 auto}#l li a{flex:1 1 auto;min-width:0}.urlDate{flex:0 0 auto;font-size:11px;color:#9ca3af;white-space:nowrap;margin-left:6px}.urlOldTag{color:#f97316;font-weight:600;margin-left:4px}.urlStatus{font-size:11px;margin-left:6px;padding:2px 6px;border-radius:999px;border:1px solid #4b5563;color:#e5e7eb;background:#111827}.urlStatus.ok{border-color:#22c55e;color:#bbf7d0;background:#14532d}.urlStatus.notfound{border-color:#ef4444;color:#fee2e2;background:#7f1d1d}.urlStatus.redirect{border-color:#eab308;color:#fef9c3;background:#713f12}.urlStatus.other{border-color:#6b7280;color:#e5e7eb;background:#111827}.urlStatus.err{border-color:#ef4444;color:#fee2e2;background:#7f1d1d}.hint{color:#9a9a9a;font-size:12px;margin:8px 0 0}</style></head><body><div id=\"top\"><div id=\"topInner\"><button id=\"closeBtn\">Stäng</button><button id=\"resetBtn\">Rensa</button><input id=\"k\" placeholder=\"Sök (blanksteg = OCH)\"><label style=\"display:flex;align-items:center;gap:4px;font-size:12px;color:#9ca3af;\"><input type=\"checkbox\" id=\"multiFilterToggle\">Kombinera filter</label><button id=\"reportBtn\" type=\"button\">Rapport</button></div></div><div id=\"wrap\"><h1><img id=\"siteIco\" src=\"' + siteFavicon + '\" alt=\"\"> Sitemap</h1><div id=\"grid\"><div id=\"stats\"><div class=\"cards\"><div class=\"card\"><h3>Översikt</h3><div class=\"kv\"><div class=\"kvRow\"><span class=\"statLabel\">Totalt antal URL</span><span class=\"statValue\">' + TOTAL + '<small>st</small></span></div><div class=\"kvRow\"><span class=\"statLabel\">Mappar (nivå 1)</span><span class=\"statValue\">' + folders.length + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Sajtens djup</span><span class=\"' + depthClass + '\">' + maxDepth + '<small>nivåer</small></span></div><div class=\"kvRow\"><span class=\"statLabel\">Saknar &lt;lastmod&gt;</span>' + missHtml + '</div><div class=\"kvRow\"><span class=\"statLabel\">URL med parametrar</span>' + paramHtml + '</div><div class=\"kvRow\"><span class=\"statLabel\">Ofullständiga URL</span>' + invalidHtml + '</div><div class=\"kvRow\"><span class=\"statLabel\">Bilder i sitemap</span>' + imgHtml + '</div><div class=\"kvRow\"><span class=\"statLabel\">PDF i sitemap</span>' + pdfHtml + '</div><div class=\"kvRow\"><span class=\"statLabel\">Tunna mappar (1 URL)</span><span class=\"' + thinClass + '\">' + thinFolders.length + '<small> st</small>' + (thinChipsHtml ? ' ' + thinChipsHtml : '') + '</span></div>' + langLine + '</div></div><div class=\"card\"><h3>Aktualitet</h3><div class=\"timeRange\"><div class=\"timeBox\"><div class=\"statLabel\">Äldsta URL</div><div class=\"statValue\">' + fmt(globalOld || null) + '</div></div><div class=\"timeBox\"><div class=\"statLabel\">Nyaste URL</div><div class=\"statValue\">' + fmt(globalNew || null) + '</div></div></div><div class=\"timeFresh\"><div class=\"timeRow\" data-range=\"30\"><span>Senaste 30 d</span><div class=\"miniBar\"><div class=\"miniBarTrack\"><i style=\"width:' + pct(n30, validDates.length) + '%\"></i></div><div class=\"miniBarVal\">' + n30 + ' (' + pct(n30, validDates.length) + '%)</div></div></div><div class=\"timeRow\" data-range=\"90\"><span>Senaste 90 d</span><div class=\"miniBar\"><div class=\"miniBarTrack\"><i style=\"width:' + pct(n90, validDates.length) + '%\"></i></div><div class=\"miniBarVal\">' + n90 + ' (' + pct(n90, validDates.length) + '%)</div></div></div><div class=\"timeRow\" data-range=\"365\"><span>Senaste 365 d</span><div class=\"miniBar\"><div class=\"miniBarTrack\"><i style=\"width:' + pct(n365, validDates.length) + '%\"></i></div><div class=\"miniBarVal\">' + n365 + ' (' + pct(n365, validDates.length) + '%)</div></div></div><div class=\"timeRow\" data-range=\"old3\"><span>Äldre än 3 år</span><div class=\"miniBar\"><div class=\"miniBarTrack\"><i style=\"width:' + pct(old3Count, validDates.length) + '%\"></i></div><div class=\"miniBarVal\">' + old3Count + ' (' + pct(old3Count, validDates.length) + '%)</div></div></div></div>' + riskBlock + yearsHtml + '</div><div class=\"card\"><h3>Validator</h3><div class=\"kv\"><div class=\"kvRow\"><span class=\"statLabel\">XML-status</span><span class=\"' + parseStatusClass + '\">' + parseStatusText + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Rot-element</span><span class=\"' + rootTypeClass + '\">' + escQ(rootTypeText) + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Namespace</span><span class=\"' + nsClass + '\">' + nsText + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Blandade url/sitemap</span><span class=\"statValue' + (mixedType ? ' warn' : '') + '\">' + (mixedType ? 'Ja' : 'Nej') + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Ogiltiga &lt;lastmod&gt;</span><span class=\"' + invalidLmClass + '\">' + invalidLmText + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Noder utan &lt;loc&gt;</span><span class=\"' + missingLocClass + '\">' + missingLocText + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Dubbletter av URL</span><span class=\"' + dupClass + '\">' + dupText + '</span></div></div></div></div><div class=\"slugStrip\"><div class=\"statLabel\">Slug-analys</div><div class=\"slugChipRow\"><span class=\"slugChipLabel\">Enord</span><span id=\"slugWords\"></span></div><div class=\"slugChipRow\"><span class=\"slugChipLabel\" id=\"slugBigLabel\">Tvåord</span><span id=\"slugBigrams\"></span></div></div><div class=\"card\" style=\"background:#20252f;border:1px solid #2b364a;border-radius:10px;padding:12px;color:#cfe0ff;margin-top:10px;\"><h3>Djupfördelning</h3><ul id=\"depthList\">' + depthLis + '</ul></div></div><div id=\"cats\"><div class=\"catsHead\"><div class=\"catsTitle\">Struktur &amp; kategorier</div><div class=\"catsSub\">Klicka på kort, chip eller nivå för att filtrera URL-listan.</div></div><div id=\"catChips\">' + chipsHtml + '</div><div id=\"catRows\" style=\"margin-top:6px\">' + rows + '</div><div class=\"hint\">Hela kortet är klickbart. Underkategorier är indragna med markerad vänsterkant.</div></div><div id=\"list\"><div id=\"listHeader\"><div id=\"count\">0 / ' + TOTAL + ' URL:er visas</div><div id=\"listActions\"><div id=\"sortControls\"><button id=\"sortDefaultBtn\" type=\"button\">Standard</button><button id=\"sortDateBtn\" type=\"button\">Datum</button><button id=\"sortNameBtn\" type=\"button\">Namn</button></div><button id=\"copyBtn\" type=\"button\">Kopiera</button><button id=\"downloadBtn\" type=\"button\">Ladda ner (CSV)</button><button id=\"statusBtn\" type=\"button\">Statuskoll</button></div></div><ul id=\"l\">' + items + '</ul></div></div></div></body></html>';
+        // NY HTML-STRÄNG MED KRYSSRUTA I TOPPEN och UPPDATERAD CSS
+        var html = '<!doctype html><html><head><meta charset="utf-8"><title>Sitemap-vy</title><link rel="icon" href="' + siteFavicon + '"><style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#1f1f1f;color:#fff;margin:0}#top{position:sticky;top:0;background:#111827;border-bottom:1px solid #2c2c2c;z-index:3}#topInner{max-width:1280px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:10px;justify-content:center}#k{width:min(1100px,80vw);padding:12px 16px;border-radius:999px;border:1px solid #4b5563;background:#020617;color:#fff;font-size:16px;outline:none;box-shadow:0 0 0 1px #020617,0 0 0 3px rgba(148,163,184,0.35)}#k:focus{box-shadow:0 0 0 1px #0f172a,0 0 0 5px rgba(56,189,248,0.35);border-color:#60a5fa;background:#020617}button{padding:6px 10px;background:#3b3b3b;color:#fff;border:none;border-radius:6px;cursor:pointer}button:hover{background:#575757}#wrap{max-width:1280px;margin:0 auto;padding:20px}h1{font-size:18px;margin:6px 0 14px;color:#ddd;display:flex;align-items:center;gap:6px}#siteIco{width:18px;height:18px;border-radius:4px;box-shadow:0 0 0 1px rgba(0,0,0,0.45);background:#020617}#grid{display:grid;grid-template-columns:minmax(220px,300px) 1fr;gap:24px;align-items:start}#stats{grid-column:1 / -1}#stats .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:10px}#stats .card{background:#20252f;border:1px solid #2b364a;border-radius:10px;padding:12px;color:#cfe0ff}#stats .card h3{margin:0 0 8px;font-size:13px;color:#eaf2ff}#stats .kv{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 16px;font-size:13px;line-height:1.35}#stats .kvRow{display:flex;flex-direction:column}.statLabel{font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:#9ca3af;margin-bottom:1px}.statValue{font-size:15px;font-weight:600;color:#e5e7eb}.statValue small{font-size:11px;font-weight:400;color:#9ca3af;margin-left:4px}.statValue.warn{color:#facc15}.statValue.bad{color:#f97316}.statValue.error{color:#ef4444}.statClick{background:none;border:none;padding:0;margin:0;font:inherit;color:inherit;cursor:pointer;text-align:left}.statClick:hover{text-decoration:underline}.slugStrip{margin-top:4px;padding-top:6px;border-top:1px solid #1f2937;font-size:12px}.slugChipRow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:3px}.slugChipLabel{font-size:11px;color:#9ca3af;text-transform:uppercase;letter-spacing:0.06em;margin-right:4px}.slugWord{background:#111827;border:1px solid #374151;color:#eaf2ff;cursor:pointer;padding:2px 7px;border-radius:999px;font:inherit;text-decoration:none;display:inline-block}.slugWord:hover{background:#1f2937;border-color:#60a5fa}.slugCount{font-size:10px;color:#a9c3ff;margin-left:3px}.timeRange{display:flex;gap:16px;margin-bottom:10px;flex-wrap:wrap}.timeBox{flex:1 1 0;min-width:120px;padding:8px;border-radius:8px;background:#1b2332;border:1px solid #2b364a}.timeFresh{display:flex;flex-direction:column;gap:6px;margin-top:4px;font-size:12px}.timeRow{display:flex;align-items:center;gap:8px;justify-content:space-between;cursor:pointer}.timeRow span{color:#d1d5db}.timeRow:hover span{color:#e5e7eb}.miniBar{flex:1 1 auto;display:flex;align-items:center;gap:6px}.miniBarTrack{position:relative;flex:1 1 auto;height:8px;border-radius:999px;background:#111827;overflow:hidden}.miniBarTrack i{display:block;height:100%;background:#58c49a}.miniBarVal{font-size:11px;color:#9ca3af;white-space:nowrap}.timeRisk{display:flex;flex-direction:column;gap:4px;margin:10px 0 0;font-size:12px}.timeNote{color:#9ca3af;font-size:11px}.timeList{display:flex;flex-wrap:wrap;gap:4px;font-size:11px;color:#d1d5db;margin-top:2px}.riskChip{padding:2px 7px;font-size:11px;border-radius:999px;background:#111827;border:1px solid #4b5563;color:#e5e7eb;cursor:pointer}.riskChip:hover{background:#1f2937;border-color:#9ca3af}.yearFilter{margin-top:8px;display:flex;flex-direction:column;gap:4px}.yearChips{display:flex;flex-wrap:wrap;gap:6px}.yearChip{padding:4px 8px;font-size:11px;border-radius:999px;background:#111827;border:1px solid #4b5563;color:#e5e7eb;cursor:pointer}.yearChip:hover{background:#1f2937;border-color:#9ca3af}.yearChipCount{font-size:10px;color:#9ca3af;margin-left:2px}#depthList{list-style:none;padding:0;margin:6px 0 0;display:flex;gap:10px;flex-wrap:wrap}#depthList li{display:flex;align-items:center;gap:6px}.depthBtn{padding:6px 10px;border-radius:6px;border:1px solid transparent;transition:background .15s ease,border-color .15s ease,color .15s ease}.depthBtn.green{background:#2f5a46;border-color:#58c49a;color:#eafff7}.depthBtn.green:hover{background:#3a6e57}.depthBtn.orange{background:#6e5324;border-color:#d6ad5c;color:#fff6e7}.depthBtn.orange:hover{background:#876733}.depthMeta{color:#a9c3ff}.thinChip{padding:2px 7px;font-size:11px;border-radius:999px;background:#111827;border:1px solid #4b5563;color:#e5e7eb;cursor:pointer;margin-left:4px}.thinChip:hover{background:#1f2937;border-color:#9ca3af}#cats{background:#232323;border:1px solid #2e2e2e;border-radius:12px;padding:14px}#cats .catsHead{margin-bottom:8px}#cats .catsTitle{font-weight:600;font-size:13px;margin-bottom:2px}#cats .catsSub{font-size:12px;color:#9ca3af;max-width:520px}#catChips{margin:6px 0 8px;display:flex;flex-wrap:wrap;gap:6px}.catChip{padding:4px 9px;font-size:12px;border-radius:999px;background:#1f2933;border:1px solid #374151;color:#e5e7eb;cursor:pointer}.catChip:hover{background:#111827;border-color:#4b5563}#catRows{margin-top:6px}#catRows .row{padding:8px 10px;margin:6px 0;cursor:pointer;display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto auto;align-items:center;gap:4px;border-radius:10px;border:1px solid #4b5563;background:radial-gradient(circle at top left,#111827,#020617);box-shadow:0 4px 10px rgba(0,0,0,0.45);transition:background .15s ease,border-color .15s ease,transform .05s ease,box-shadow .1s ease}#catRows .row:hover{background:radial-gradient(circle at top left,#1f2937,#020617);border-color:#60a5fa;transform:translateY(-1px);box-shadow:0 6px 16px rgba(15,23,42,0.8)}#catRows .rowActive{background:radial-gradient(circle at top left,#1e293b,#020617);border-color:#93c5fd;box-shadow:0 0 0 1px #60a5fa,0 6px 16px rgba(15,23,42,0.9)}#catRows .leftcell{grid-column:1;grid-row:1;display:flex;align-items:center;gap:6px}#catRows .lbl{font-weight:600}#catRows .row:hover .lbl,#catRows .rowActive .lbl{color:#e5f2ff}#catRows .row.subrow .lbl{font-weight:400}#catRows .meta{grid-column:2;grid-row:1;color:#e5e7eb;text-align:right;white-space:nowrap;font-size:13px}#catRows .dates{grid-column:1 / -1;grid-row:2;color:#a9cff;font-size:12px;opacity:.95}#catRows .bar{grid-column:1 / -1;grid-row:3;height:8px;background:#333;border-radius:999px;overflow:hidden;margin-top:2px}#catRows .bar>i{display:block;height:100%;background:#58c49a}#catRows .subrow{margin-left:15px;background:rgba(255,255,255,0.03);border-left:3px solid #4b5563}#catRows .caret{display:inline-flex;width:14px;justify-content:center;align-items:center;font-size:11px;color:#9ca3af}#catRows .caret::before{content:\"›\";font-weight:bold}#list{background:#232323;border:1px solid #2e2e2e;border-radius:12px;padding:14px;min-height:200px}#listHeader{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px}#listActions{display:flex;gap:6px;align-items:center}#listActions button{padding:4px 8px;font-size:11px;border-radius:999px}#sortControls{display:flex;gap:4px;margin-right:4px}#count{margin:0;color:#bbb;font-weight:600;font-size:13px}ul{list-style:square;padding-left:18px;margin:10px 0 0}li{margin:7px 0;line-height:1.28}a{color:#fff;text-decoration:none;border:0}a:hover{text-decoration:none;border:0}#l{list-style:none;padding-left:0;margin:10px 0 0}#l li{position:relative;display:flex;justify-content:space-between;align-items:flex-start;gap:6px;margin:11px 0;line-height:1.32}#l li::before{content:\"■\";font-size:7px;color:#6b7280;margin-top:4px;flex:0 0 auto}#l li a{flex:1 1 auto;min-width:0}.urlDate{flex:0 0 auto;font-size:11px;color:#9ca3af;white-space:nowrap;margin-left:6px}.urlOldTag{color:#f97316;font-weight:600;margin-left:4px}.urlStatus{font-size:11px;margin-left:6px;padding:2px 6px;border-radius:999px;border:1px solid #4b5563;color:#e5e7eb;background:#111827}.urlStatus.ok{border-color:#22c55e;color:#bbf7d0;background:#14532d}.urlStatus.notfound{border-color:#ef4444;color:#fee2e2;background:#7f1d1d}.urlStatus.redirect{border-color:#eab308;color:#fef9c3;background:#713f12}.urlStatus.other{border-color:#6b7280;color:#e5e7eb;background:#111827}.urlStatus.err{border-color:#ef4444;color:#fee2e2;background:#7f1d1d}.hint{color:#9a9a9a;font-size:12px;margin:8px 0 0}.filterActive{box-shadow: 0 0 0 2px #60a5fa, 0 0 0 4px rgba(56,189,248,0.35) !important; background: #0b1220 !important; border-color: #60a5fa !important; color: #eaf2ff !important;}</style></head><body><div id=\"top\"><div id=\"topInner\"><button id=\"closeBtn\">Stäng</button><button id=\"resetBtn\">Rensa</button><input id=\"k\" placeholder=\"Sök (blanksteg = OCH)\"><label style=\"display:flex;align-items:center;gap:4px;font-size:12px;color:#9ca3af;\"><input type=\"checkbox\" id=\"multiFilterToggle\">Kombinera filter</label><button id=\"reportBtn\" type=\"button\">Rapport</button></div></div><div id=\"wrap\"><h1><img id=\"siteIco\" src=\"' + siteFavicon + '\" alt=\"\"> Sitemap</h1><div id=\"grid\"><div id=\"stats\"><div class=\"cards\"><div class=\"card\"><h3>Översikt</h3><div class=\"kv\"><div class=\"kvRow\"><span class=\"statLabel\">Totalt antal URL</span><span class=\"statValue\">' + TOTAL + '<small>st</small></span></div><div class=\"kvRow\"><span class=\"statLabel\">Mappar (nivå 1)</span><span class=\"statValue\">' + folders.length + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Sajtens djup</span><span class=\"' + depthClass + '\">' + maxDepth + '<small>nivåer</small></span></div><div class=\"kvRow\"><span class=\"statLabel\">Saknar &lt;lastmod&gt;</span>' + missHtml + '</div><div class=\"kvRow\"><span class=\"statLabel\">URL med parametrar</span>' + paramHtml + '</div><div class=\"kvRow\"><span class=\"statLabel\">Ofullständiga URL</span>' + invalidHtml + '</div><div class=\"kvRow\"><span class=\"statLabel\">Bilder i sitemap</span>' + imgHtml + '</div><div class=\"kvRow\"><span class=\"statLabel\">PDF i sitemap</span>' + pdfHtml + '</div><div class=\"kvRow\"><span class=\"statLabel\">Tunna mappar (1 URL)</span><span class=\"' + thinClass + '\">' + thinFolders.length + '<small> st</small>' + (thinChipsHtml ? ' ' + thinChipsHtml : '') + '</span></div>' + langLine + '</div></div><div class=\"card\"><h3>Aktualitet</h3><div class=\"timeRange\"><div class=\"timeBox\"><div class=\"statLabel\">Äldsta URL</div><div class=\"statValue\">' + fmt(globalOld || null) + '</div></div><div class=\"timeBox\"><div class=\"statLabel\">Nyaste URL</div><div class=\"statValue\">' + fmt(globalNew || null) + '</div></div></div><div class=\"timeFresh\"><div class=\"timeRow\" data-range=\"30\"><span>Senaste 30 d</span><div class=\"miniBar\"><div class=\"miniBarTrack\"><i style=\"width:' + pct(n30, validDates.length) + '%\"></i></div><div class=\"miniBarVal\">' + n30 + ' (' + pct(n30, validDates.length) + '%)</div></div></div><div class=\"timeRow\" data-range=\"90\"><span>Senaste 90 d</span><div class=\"miniBar\"><div class=\"miniBarTrack\"><i style=\"width:' + pct(n90, validDates.length) + '%\"></i></div><div class=\"miniBarVal\">' + n90 + ' (' + pct(n90, validDates.length) + '%)</div></div></div><div class=\"timeRow\" data-range=\"365\"><span>Senaste 365 d</span><div class=\"miniBar\"><div class=\"miniBarTrack\"><i style=\"width:' + pct(n365, validDates.length) + '%\"></i></div><div class=\"miniBarVal\">' + n365 + ' (' + pct(n365, validDates.length) + '%)</div></div></div><div class=\"timeRow\" data-range=\"old3\"><span>Äldre än 3 år</span><div class=\"miniBar\"><div class=\"miniBarTrack\"><i style=\"width:' + pct(old3Count, validDates.length) + '%\"></i></div><div class=\"miniBarVal\">' + old3Count + ' (' + pct(old3Count, validDates.length) + '%)</div></div></div></div>' + riskBlock + yearsHtml + '</div><div class=\"card\"><h3>Validator</h3><div class=\"kv\"><div class=\"kvRow\"><span class=\"statLabel\">XML-status</span><span class=\"' + parseStatusClass + '\">' + parseStatusText + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Rot-element</span><span class=\"' + rootTypeClass + '\">' + escQ(rootTypeText) + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Namespace</span><span class=\"' + nsClass + '\">' + nsText + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Blandade url/sitemap</span><span class=\"statValue' + (mixedType ? ' warn' : '') + '\">' + (mixedType ? 'Ja' : 'Nej') + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Ogiltiga &lt;lastmod&gt;</span><span class=\"' + invalidLmClass + '\">' + invalidLmText + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Noder utan &lt;loc&gt;</span><span class=\"' + missingLocClass + '\">' + missingLocText + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Dubbletter av URL</span><span class=\"' + dupClass + '\">' + dupText + '</span></div></div></div></div><div class=\"slugStrip\"><div class=\"statLabel\">Slug-analys</div><div class=\"slugChipRow\"><span class=\"slugChipLabel\">Enord</span><span id=\"slugWords\"></span></div><div class=\"slugChipRow\"><span class=\"slugChipLabel\" id=\"slugBigLabel\">Tvåord</span><span id=\"slugBigrams\"></span></div></div><div class=\"card\" style=\"background:#20252f;border:1px solid #2b364a;border-radius:10px;padding:12px;color:#cfe0ff;margin-top:10px;\"><h3>Djupfördelning</h3><ul id=\"depthList\">' + depthLis + '</ul></div></div><div id=\"cats\"><div class=\"catsHead\"><div class=\"catsTitle\">Struktur &amp; kategorier</div><div class=\"catsSub\">Klicka på kort, chip eller nivå för att filtrera URL-listan.</div></div><div id=\"catChips\">' + chipsHtml + '</div><div id=\"catRows\" style=\"margin-top:6px\">' + rows + '</div><div class=\"hint\">Hela kortet är klickbart. Underkategorier är indragna med markerad vänsterkant.</div></div><div id=\"list\"><div id=\"listHeader\"><div id=\"count\">0 / ' + TOTAL + ' URL:er visas</div><div id=\"listActions\"><div id=\"sortControls\"><button id=\"sortDefaultBtn\" type=\"button\">Standard</button><button id=\"sortDateBtn\" type=\"button\">Datum</button><button id=\"sortNameBtn\" type=\"button\">Namn</button></div><button id=\"copyBtn\" type=\"button\">Kopiera</button><button id=\"downloadBtn\" type=\"button\">Ladda ner (CSV)</button><button id=\"statusBtn\" type=\"button\">Statuskoll</button></div></div><ul id=\"l\">' + items + '</ul></div></div></div></body></html>';
         var w = open('', '_blank');
         if (!w) {
             E('Kunde inte öppna nytt fönster/flik');
@@ -1009,6 +1009,7 @@
                 li.style.display = isMatch ? '' : 'none';
             }
 
+            clearActiveRows(); // Uppdatera visuell markering
             refresh(); // Uppdatera räknare och slug-analys
         }
 
@@ -1108,26 +1109,76 @@
         }
 
         function clearActiveRows() {
+            // Rensa alla kategorigränssnitt (stora rader)
             var rs = [].slice.call(doc.querySelectorAll('#catRows .row'));
             for (var i = 0; i < rs.length; i++) {
-                rs[i].classList.remove('rowActive')
+                rs[i].classList.remove('rowActive');
             }
-            // Hantera aktiva färger för stat/djup/tid-knappar (borttagen om den inte är aktiv i activeFilters)
-            var activeElems = doc.querySelectorAll('.depthBtn[data-depth], .timeRow[data-range], .yearChip[data-year], .statClick[data-kind]');
+
+            // Rensa/Applicera visuell markering för knappar (Statistik, Djup, Tid, Årtal, etc.)
+            var activeElems = doc.querySelectorAll('.depthBtn[data-depth], .timeRow, .yearChip[data-year], .statClick[data-kind], .riskChip, .thinChip, .catChip');
+            
             activeElems.forEach(function(el) {
-                var isActive = false;
-                if (el.matches('.depthBtn') && activeFilters.depth !== null && parseInt(el.getAttribute('data-depth'), 10) === activeFilters.depth) isActive = true;
-                if (el.matches('.timeRow') && activeFilters.range === el.getAttribute('data-range')) isActive = true;
-                if (el.matches('.yearChip') && activeFilters.year === el.getAttribute('data-year')) isActive = true;
-                if (el.matches('.statClick') && activeFilters.stat === el.getAttribute('data-kind')) isActive = true;
+                el.classList.remove('filterActive');
                 
-                if (isActive) {
-                    el.classList.add('rowActive'); // Återanvänd rowActive för att markera klickade filter
+                // Måste hanteras annorlunda för timeRow eftersom den har span inuti
+                var targetEl = el.matches('.timeRow') ? el.querySelector('span') : el; 
+                if (!targetEl) targetEl = el;
+
+                // Hantera TimeRow's span inuti.
+                if (el.matches('.timeRow')) {
+                    el.classList.remove('filterActive');
+                }
+                
+                var isCurrentlyActive = false;
+                
+                // 1. Djup-knappar
+                if (el.matches('.depthBtn') && activeFilters.depth !== null && parseInt(el.getAttribute('data-depth'), 10) === activeFilters.depth) {
+                    isCurrentlyActive = true;
+                }
+                
+                // 2. Tid/Range
+                if (el.matches('.timeRow') && activeFilters.range === el.getAttribute('data-range')) {
+                    isCurrentlyActive = true;
+                }
+                
+                // 3. Årtal
+                if (el.matches('.yearChip') && activeFilters.year === el.getAttribute('data-year')) {
+                    isCurrentlyActive = true;
+                }
+
+                // 4. Stat/Metafilter
+                if (el.matches('.statClick') && activeFilters.stat === el.getAttribute('data-kind')) {
+                    isCurrentlyActive = true;
+                }
+
+                // 5. Kategori/Chip-filter (Risk/Thin/CatChip)
+                if (el.matches('.riskChip, .thinChip, .catChip')) {
+                     var l1 = el.getAttribute('data-l1');
+                     if (activeFilters.category === l1 && !activeFilters.sub && !activeFilters.root) {
+                        isCurrentlyActive = true;
+                     }
+                }
+                
+                if (isCurrentlyActive) {
+                    targetEl.classList.add('filterActive');
                 } else {
-                    el.classList.remove('rowActive');
+                    targetEl.classList.remove('filterActive');
                 }
             });
+            
+            // Markera aktiv kategorigränsyta (rowActive)
+            if (activeFilters.root) {
+                var rootRow = doc.querySelector('#catRows .row[data-root="1"]');
+                if (rootRow) rootRow.classList.add('rowActive');
+            } else if (activeFilters.category) {
+                var selector = activeFilters.sub 
+                    ? '#catRows .row.subrow[data-parent="' + activeFilters.category + '"][data-sub="' + activeFilters.sub + '"]'
+                    : '#catRows .row[data-l1="' + activeFilters.category + '"]:not([data-sub])';
 
+                var catRow = doc.querySelector(selector);
+                if (catRow) catRow.classList.add('rowActive');
+            }
         }
 
         function collapseAllSubs() {
@@ -1146,19 +1197,11 @@
                 toggleEl.onchange = function() {
                     multiFilterMode = toggleEl.checked;
                     
-                    // Om vi stänger av multi-läge, rensa alla filter utom söktermen 
-                    // och det senast klickade filtret
                     if (!multiFilterMode) {
-                         // Identifiera det senast aktiva filtret (vi måste köra applyFilters för att rensa UI korrekt)
-                        var tempFilters = Object.assign({}, activeFilters); 
-                        
-                        // Helt nollställa activeFilters (förutom search)
+                        // Om vi stänger av multi-läge, rensa alla filter utom söktermen
                         var searchVal = activeFilters.search;
-                        clearCategoryFilters(false); // Rensa allt utom search
+                        clearCategoryFilters(false);
                         activeFilters.search = searchVal;
-                        
-                        // Vi kan inte veta vilket filter som var "senast" utan mer sofistikerad loggning.
-                        // För enkelhetens skull: när man avmarkerar, rensa alla filter utom sök.
                     }
                     applyFilters();
                 };
@@ -1190,7 +1233,6 @@
                 var kEl = $('k');
                 kEl.oninput = function() {
                     activeFilters.search = kEl.value.trim(); 
-                    // clearActiveRows(); behövs inte här då sökning inte ändrar rad-status
                     applyFilters();
                 }
             })()
@@ -1217,7 +1259,6 @@
                     activeFilters.depth = d;
                 }
                 
-                clearActiveRows();
                 applyFilters();
             })
         })();
@@ -1243,12 +1284,11 @@
                     activeFilters.range = r;
                 }
 
-                clearActiveRows();
                 applyFilters();
             })
         })();
         
-        // Årtalsfilter
+        // Årtalsfilter & Statistik/Metafilter
         (function() {
             var stats = doc.querySelector('#stats');
             if (!stats) return;
@@ -1268,8 +1308,8 @@
                         activeFilters.year = y;
                     }
                     
-                    clearActiveRows();
                     applyFilters();
+                    return;
                 }
                 
                 // --- Statistik/Metafilter (missingLastmod, params, invalid, img, pdf) ---
@@ -1289,13 +1329,12 @@
                     activeFilters.stat = kind;
                 }
                 
-                clearActiveRows();
                 applyFilters();
             })
         })();
 
 
-        // Kategori-knappar (Chips)
+        // Kategori-knappar (Chips: CatChip, RiskChip, ThinChip)
         (function() {
             var chipHandlers = function(ev) {
                 var btn = ev.target.closest('[data-l1]');
@@ -1312,6 +1351,7 @@
                 if (isActive) {
                     activeFilters.category = '';
                     activeFilters.sub = '';
+                    activeFilters.root = false;
                     collapseAllSubs();
                 } else {
                     activeFilters.category = cat;
@@ -1320,7 +1360,6 @@
                     toggleSubsFor(cat); // Behåll toggle-funktionaliteten
                 }
                 
-                clearActiveRows();
                 applyFilters();
             };
             
@@ -1348,31 +1387,25 @@
                     clearCategoryFilters(true);
                 }
                 
+                // Hantera expandering/kollaps (görs oavsett filterläge)
+                if (l1 && !parent) {
+                    toggleSubsFor(l1); 
+                }
+
                 // 1. Hantera toggle/rensa kategori
                 if (isActive) {
                     // Avaktivera
                     activeFilters.category = '';
                     activeFilters.sub = '';
                     activeFilters.root = false;
-                    
-                    // Om det är en huvudrad, kollapsa subrader
-                    if(l1) toggleSubsFor(l1); 
-
                 } else {
                     // Aktivera
                     activeFilters.category = l1 || '';
                     activeFilters.sub = sub || '';
                     activeFilters.root = isRoot;
-
-                    // Om det är en huvudrad, expandera subrader (görs bäst EFTER clearCategoryFilters)
-                    if(l1 && !parent) toggleSubsFor(l1);
                 }
 
-                // 2. Markering (Visuell feedback)
-                clearActiveRows();
-                if (!isActive) row.classList.add('rowActive');
-
-                // 3. Filtrera listan
+                // 2. Filtrera listan (Visuell markering hanteras av applyFilters via clearActiveRows)
                 applyFilters();
             })
         })();
@@ -1386,7 +1419,7 @@
             var term = (btn.getAttribute('data-slug') || '').trim();
             var kEl = $('k');
             
-            // Hanterar nu sökning i multi-läge eller enkel-läge
+            // Sökning ersätter aldrig andra filter
             if (kEl) {
                 activeFilters.search = term;
                 kEl.value = term;
