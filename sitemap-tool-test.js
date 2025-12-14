@@ -794,14 +794,81 @@
                 return +x
             }).sort(function(a, b) {
                 return a - b
-            }),
-            depthLis = depthKeys.map(function(dv) {
-                var cnt = depthCounts[dv],
-                    pp = Math.round((cnt / TOTAL) * 1000) / 10,
-                    cls = dv <= 3 ? 'green' : (dv <= 6 ? 'orange' : 'bad');
-                return '<li><button class="depthBtn ' + cls + '" data-depth="' + dv + '">Nivå ' + dv + '</button><span class="depthMeta">' + cnt + ' (' + pp + '%)</span></li>'
-            }).join(''),
-            langs = Object.keys(langMap).sort(),
+            });
+        
+        // --- FUNKTION FÖR ROBUST DJUPSANALYS & VISUALISERING (Tabell) ---
+        function getDepthVizHtml(depthCounts) {
+            var depthKeys = Object.keys(depthCounts).map(function(x) { return +x }).sort(function(a, b) { return a - b });
+            var maxCount = 0;
+            var vizHtml = '';
+            var consoleOutput = '\n--- Djupfördelning (Diagnos & Konsol Logg) ---\n';
+            
+            for (var k in depthCounts) {
+                var count = depthCounts[k];
+                if (count > maxCount) maxCount = count;
+            }
+
+            consoleOutput += "Max antal URL vid ett djup: " + maxCount + "\n";
+            consoleOutput += "----------------------------------------------\n";
+
+            if (maxCount === 0 || depthKeys.length === 0) {
+                return '<p style="color:#f97316; text-align:center; font-size:13px;">Kunde inte beräkna djupfördelningen (inga giltiga URL:er hittades med djup > 0).</p>';
+            }
+
+            var tableHtml = '<table class="vizTable"><thead><tr><th>Djup</th><th>Antal URL</th><th style="width: 60%;">Fördelning (relativt max)</th></tr></thead><tbody>';
+
+            for (var i = 0; i < depthKeys.length; i++) {
+                var depth = depthKeys[i];
+                var count = depthCounts[depth];
+                var percentage = (count / maxCount) * 100; // Använd maxCount för att skala stapeln
+                var displayPct = Math.round((count / TOTAL) * 1000) / 10;
+
+                var colorClass;
+                var risk = 'Låg Risk';
+                if (depth <= 3) {
+                    colorClass = 'g';
+                } else if (depth <= 6) {
+                    colorClass = 'o';
+                    risk = 'Viss Risk';
+                } else {
+                    colorClass = 'r';
+                    risk = 'Hög Risk';
+                }
+                
+                // HTML Row
+                // Hela raden görs klickbar via EventListener nedan
+                tableHtml += '<tr data-depth="' + depth + '"><td><button class="depthBtn ' + colorClass + '" type="button" data-depth="' + depth + '">Nivå ' + depth + '</button></td>';
+                tableHtml += '<td class="depthCount">' + count + ' <span style="color:#9ca3af;font-size:11px;">(' + displayPct + '%)</span></td>';
+                tableHtml += '<td><div class="depthBar ' + colorClass + '" style="width:' + percentage.toFixed(1) + '%;"></div></td></tr>';
+                
+                // Console Output (ASCII Bar Chart)
+                var barLength = Math.round(percentage / 3); 
+                var bar = '#'.repeat(barLength);
+                consoleOutput += 'Nivå ' + depth + ' (' + count + ')\t[' + bar.padEnd(30, ' ') + '] ' + risk + '\n';
+            }
+            tableHtml += '</tbody></table>';
+
+            console.log(consoleOutput);
+            console.log("----------------------------------------------\n");
+            
+            // Vi returnerar den robusta tabellen istället för den opålitliga SVG:n
+            vizHtml = tableHtml + '<p style="font-size:11px; color:#9ca3af; margin-top: 10px;">Klicka på en "Nivå"-knapp för att filtrera listan. Stapelns längd är relativ till det djup som har flest URL:er.</p>';
+            
+            return vizHtml;
+        }
+        // --- SLUT FUNKTION FÖR ROBUST DJUPSANALYS & VISUALISERING ---
+
+        var depthVizHtml = getDepthVizHtml(depthCounts);
+
+        // Tidigare genererad HTML-lista för djupnivåer
+        var depthLis = depthKeys.map(function(dv) {
+            var cnt = depthCounts[dv],
+                pp = Math.round((cnt / TOTAL) * 1000) / 10,
+                cls = dv <= 3 ? 'green' : (dv <= 6 ? 'orange' : 'bad');
+            return '<li><button class="depthBtn ' + cls + '" data-depth="' + dv + '">Nivå ' + dv + '</button><span class="depthMeta">' + cnt + ' (' + pp + '%)</span></li>'
+        }).join('');
+        
+        var langs = Object.keys(langMap).sort(),
             langLine = langs.length ? '<div class="kvRow"><span class="statLabel">Språk i sitemap (nivå 1)</span><span class="statValue">' + langs.length + ' <span style="color:#a9c3ff">[' + langs.join(', ') + ']</span></span></div>' : '',
             yearKeys = Object.keys(yearCounts),
             yearsHtml = '';
@@ -897,7 +964,9 @@
         var imgHtml = imgCount > 0 ? '<button class="' + imgClass + ' statClick" data-kind="img">' + imgInner + '</button>' : '<span class="' + imgClass + '">' + imgInner + '</span>';
         var pdfInner = '' + pdfCount;
         var pdfHtml = pdfCount > 0 ? '<button class="' + pdfClass + ' statClick" data-kind="pdf">' + pdfInner + '</button>' : '<span class="' + pdfClass + '">' + pdfInner + '</span>';
-        var html = '<!doctype html><html><head><meta charset="utf-8"><title>Sitemap-vy</title><link rel="icon" href="' + siteFavicon + '"><style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#1f1f1f;color:#fff;margin:0}#top{position:sticky;top:0;background:#111827;border-bottom:1px solid #2c2c2c;z-index:3}#topInner{max-width:1280px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:10px;justify-content:center}#k{width:min(1100px,80vw);padding:12px 16px;border-radius:999px;border:1px solid #4b5563;background:#020617;color:#fff;font-size:16px;outline:none;box-shadow:0 0 0 1px #020617,0 0 0 3px rgba(148,163,184,0.35)}#k:focus{box-shadow:0 0 0 1px #0f172a,0 0 0 5px rgba(56,189,248,0.35);border-color:#60a5fa;background:#020617}button{padding:6px 10px;background:#3b3b3b;color:#fff;border:none;border-radius:6px;cursor:pointer}button:hover{background:#575757}#wrap{max-width:1280px;margin:0 auto;padding:20px}h1{font-size:18px;margin:6px 0 14px;color:#ddd;display:flex;align-items:center;gap:6px}#siteIco{width:18px;height:18px;border-radius:4px;box-shadow:0 0 0 1px rgba(0,0,0,0.45);background:#020617}#grid{display:grid;grid-template-columns:minmax(220px,300px) 1fr;gap:24px;align-items:start}#stats{grid-column:1 / -1}#stats .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:10px}#stats .card{background:#20252f;border:1px solid #2b364a;border-radius:10px;padding:12px;color:#cfe0ff}#stats .card h3{margin:0 0 8px;font-size:13px;color:#eaf2ff}#stats .kv{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 16px;font-size:13px;line-height:1.35}#stats .kvRow{display:flex;flex-direction:column}.statLabel{font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:#9ca3af;margin-bottom:1px}.statValue{font-size:15px;font-weight:600;color:#e5e7eb}.statValue small{font-size:11px;font-weight:400;color:#9ca3af;margin-left:4px}.statValue.warn{color:#facc15}.statValue.bad{color:#f97316}.statValue.error{color:#ef4444}.statClick{background:none;border:none;padding:0;margin:0;font:inherit;color:inherit;cursor:pointer;text-align:left}.statClick:hover{text-decoration:underline}.slugStrip{margin-top:4px;padding-top:6px;border-top:1px solid #1f2937;font-size:12px}.slugChipRow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:3px}.slugChipLabel{font-size:11px;color:#9ca3af;text-transform:uppercase;letter-spacing:0.06em;margin-right:4px}.slugWord{background:#111827;border:1px solid #374151;color:#eaf2ff;cursor:pointer;padding:2px 7px;border-radius:999px;font:inherit;text-decoration:none;display:inline-block}.slugWord:hover{background:#1f2937;border-color:#60a5fa}.slugCount{font-size:10px;color:#a9c3ff;margin-left:3px}.timeRange{display:flex;gap:16px;margin-bottom:10px;flex-wrap:wrap}.timeBox{flex:1 1 0;min-width:120px;padding:8px;border-radius:8px;background:#1b2332;border:1px solid #2b364a}.timeFresh{display:flex;flex-direction:column;gap:6px;margin-top:4px;font-size:12px}.timeRow{display:flex;align-items:center;gap:8px;justify-content:space-between;cursor:pointer}.timeRow span{color:#d1d5db}.timeRow:hover span{color:#e5e7eb}.miniBar{flex:1 1 auto;display:flex;align-items:center;gap:6px}.miniBarTrack{position:relative;flex:1 1 auto;height:8px;border-radius:999px;background:#111827;overflow:hidden}.miniBarTrack i{display:block;height:100%;background:#58c49a}.miniBarVal{font-size:11px;color:#9ca3af;white-space:nowrap}.timeRisk{display:flex;flex-direction:column;gap:4px;margin:10px 0 0;font-size:12px}.timeNote{color:#9ca3af;font-size:11px}.timeList{display:flex;flex-wrap:wrap;gap:4px;font-size:11px;color:#d1d5db;margin-top:2px}.riskChip{padding:2px 7px;font-size:11px;border-radius:999px;background:#111827;border:1px solid #4b5563;color:#e5e7eb;cursor:pointer}.riskChip:hover{background:#1f2937;border-color:#9ca3af}.yearFilter{margin-top:8px;display:flex;flex-direction:column;gap:4px}.yearChips{display:flex;flex-wrap:wrap;gap:6px}.yearChip{padding:4px 8px;font-size:11px;border-radius:999px;background:#111827;border:1px solid #4b5563;color:#e5e7eb;cursor:pointer}.yearChip:hover{background:#1f2937;border-color:#9ca3af}.yearChipCount{font-size:10px;color:#9ca3af;margin-left:2px}#depthList{list-style:none;padding:0;margin:6px 0 0;display:flex;gap:10px;flex-wrap:wrap}#depthList li{display:flex;align-items:center;gap:6px}.depthBtn{padding:6px 10px;border-radius:6px;border:1px solid transparent;transition:background .15s ease,border-color .15s ease,color .15s ease}.depthBtn.green{background:#2f5a46;border-color:#58c49a;color:#eafff7}.depthBtn.green:hover{background:#3a6e57}.depthBtn.orange{background:#6e5324;border-color:#d6ad5c;color:#fff6e7}.depthBtn.orange:hover{background:#876733}.depthBtn.bad{background:#7f2222;border-color:#ef4444;color:#fee2e2}.depthBtn.bad:hover{background:#9e3333}.depthMeta{color:#a9c3ff}.thinChip{padding:2px 7px;font-size:11px;border-radius:999px;background:#111827;border:1px solid #4b5563;color:#e5e7eb;cursor:pointer;margin-left:4px}.thinChip:hover{background:#1f2937;border-color:#9ca3af}#cats{background:#232323;border:1px solid #2e2e2e;border-radius:12px;padding:14px}#cats .catsHead{margin-bottom:8px}#cats .catsTitle{font-weight:600;font-size:13px;margin-bottom:2px}#cats .catsSub{font-size:12px;color:#9ca3af;max-width:520px}#catChips{margin:6px 0 8px;display:flex;flex-wrap:wrap;gap:6px}.catChip{padding:4px 9px;font-size:12px;border-radius:999px;background:#1f2933;border:1px solid #374151;color:#e5e7eb;cursor:pointer}.catChip:hover{background:#111827;border-color:#4b5563}#list{background:#232323;border:1px solid #2e2e2e;border-radius:12px;padding:14px;min-height:200px}#listHeader{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px}#listActions{display:flex;gap:6px;align-items:center}#listActions button{padding:4px 8px;font-size:11px;border-radius:999px}#sortControls{display:flex;gap:4px;margin-right:4px}#count{margin:0;color:#bbb;font-weight:600;font-size:13px}.row{padding:8px 10px;margin:6px 0;cursor:pointer;display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto auto;align-items:center;gap:4px;border-radius:10px;border:1px solid #4b5563;background:radial-gradient(circle at top left,#111827,#020617);box-shadow:0 4px 10px rgba(0,0,0,0.45);transition:background .15s ease,border-color .15s ease,transform .05s ease,box-shadow .1s ease}.row:hover{background:radial-gradient(circle at top left,#1f2937,#020617);border-color:#60a5fa;transform:translateY(-1px);box-shadow:0 6px 16px rgba(15,23,42,0.8)}.rowActive{background:radial-gradient(circle at top left,#1e293b,#020617);border-color:#93c5fd;box-shadow:0 0 0 1px #60a5fa,0 6px 16px rgba(15,23,42,0.9)}.leftcell{grid-column:1;grid-row:1;display:flex;align-items:center;gap:6px}.lbl{font-weight:600}.row:hover .lbl,.rowActive .lbl{color:#e5f2ff}.row.subrow .lbl{font-weight:400}.meta{grid-column:2;grid-row:1;color:#e5e7eb;text-align:right;white-space:nowrap;font-size:13px}.dates{grid-column:1 / -1;grid-row:2;color:#a9cff;font-size:12px;opacity:.95}.bar{grid-column:1 / -1;grid-row:3;height:8px;background:#333;border-radius:999px;overflow:hidden;margin-top:2px}.bar>i{display:block;height:100%;background:#58c49a}.subrow{margin-left:15px;background:rgba(255,255,255,0.03);border-left:3px solid #4b5563}.caret{display:inline-flex;width:14px;justify-content:center;align-items:center;font-size:11px;color:#9ca3af}.caret::before{content:"›";font-weight:bold}ul{list-style:square;padding-left:18px;margin:10px 0 0}li{margin:7px 0;line-height:1.28}a{color:#fff;text-decoration:none;border:0}a:hover{text-decoration:none;border:0}#list ul{list-style:none;padding-left:0;margin:10px 0 0}#list ul li{position:relative;display:flex;justify-content:space-between;align-items:flex-start;gap:6px;margin:11px 0;line-height:1.32}#list ul li::before{content:"■";font-size:7px;color:#6b7280;margin-top:4px;flex:0 0 auto}#list ul li a{flex:1 1 auto;min-width:0}.urlDate{flex:0 0 auto;font-size:11px;color:#9ca3af;white-space:nowrap;margin-left:6px}.urlOldTag{color:#f97316;font-weight:600;margin-left:4px}.urlStatus{font-size:11px;margin-left:6px;padding:2px 6px;border-radius:999px;border:1px solid #4b5563;color:#e5e7eb;background:#111827}.urlStatus.ok{border-color:#22c55e;color:#bbf7d0;background:#14532d}.urlStatus.notfound{border-color:#ef4444;color:#fee2e2;background:#7f1d1d}.urlStatus.redirect{border-color:#eab308;color:#fef9c3;background:#713f12}.urlStatus.other{border-color:#6b7280;color:#e5e7eb;background:#111827}.urlStatus.err{border-color:#ef4444;color:#fee2e2;background:#7f1d1d}.hint{color:#9a9a9a;font-size:12px;margin:8px 0 0}#depthViz{display:none;padding:0;}.vizTable{width:100%;border-collapse:collapse;margin:0;font-size:12px}.vizTable th{text-align:left;padding:8px 6px;color:#9ca3af}.vizTable td{padding:8px 6px;border-top:1px solid #2b364a;cursor:pointer;}.vizTable td:hover{background:#2a344a;}.depthBar{height:8px;border-radius:4px;margin-left:10px;width:100%;}.depthBar.g{background:#58c49a}.depthBar.o{background:#facc15}.depthBar.r{background:#f97316}.depthCount{font-size:13px;font-weight:600; text-align:right;}</style></head><body><div id="top"><div id="topInner"><button id="closeBtn">Stäng</button><button id="resetBtn">Rensa</button><button id="depthVizBtn" type="button">Djupsyn</button><input id="k" placeholder="Sök (blanksteg = OCH)"><button id="reportBtn" type="button">Rapport</button></div></div><div id="wrap"><h1><img id="siteIco" src="' + siteFavicon + '" alt=""> Sitemap!!</h1><div id="grid"><div id="stats"><div class="cards"><div class="card"><h3>Översikt</h3><div class="kv"><div class="kvRow"><span class="statLabel">Totalt antal URL</span><span class="statValue">' + TOTAL + '<small>st</small></span></div><div class="kvRow"><span class="statLabel">Mappar (nivå 1)</span><span class="statValue">' + folders.length + '</span></div><div class="kvRow"><span class="statLabel">Sajtens djup</span><span class="' + depthClass + '\">' + maxDepth + '<small>nivåer</small></span></div><div class="kvRow"><span class="statLabel">Saknar &lt;lastmod&gt;</span>' + missHtml + '</div><div class="kvRow"><span class="statLabel">URL med parametrar</span>' + paramHtml + '</div><div class="kvRow"><span class="statLabel">Ofullständiga URL</span>' + invalidHtml + '</div><div class="kvRow"><span class="statLabel">Bilder i sitemap</span>' + imgHtml + '</div><div class="kvRow"><span class="statLabel">PDF i sitemap</span>' + pdfHtml + '</div><div class="kvRow"><span class=\"statLabel\">Tunna mappar (1 URL)</span><span class=\"' + thinClass + '\">' + thinFolders.length + '<small> st</small>' + (thinChipsHtml ? ' ' + thinChipsHtml : '') + '</span></div>' + langLine + '</div></div><div class=\"card\"><h3>Aktualitet</h3><div class=\"timeRange\"><div class=\"timeBox\"><div class=\"statLabel\">Äldsta URL</div><div class=\"statValue\">' + fmt(globalOld || null) + '</div></div><div class=\"timeBox\"><div class=\"statLabel\">Nyaste URL</div><div class=\"statValue\">' + fmt(globalNew || null) + '</div></div></div><div class=\"timeFresh\"><div class=\"timeRow\" data-range=\"30\"><span>Senaste 30 d</span><div class=\"miniBar\"><div class=\"miniBarTrack\"><i style=\"width:' + pct(n30, validDates.length) + '%\"></i></div><div class=\"miniBarVal\">' + n30 + ' (' + pct(n30, validDates.length) + '%)</div></div></div><div class=\"timeRow\" data-range=\"90\"><span>Senaste 90 d</span><div class=\"miniBar\"><div class=\"miniBarTrack\"><i style=\"width:' + pct(n90, validDates.length) + '%\"></i></div><div class=\"miniBarVal\">' + n90 + ' (' + pct(n90, validDates.length) + '%)</div></div></div><div class=\"timeRow\" data-range=\"365\"><span>Senaste 365 d</span><div class=\"miniBar\"><div class=\"miniBarTrack\"><i style=\"width:' + pct(n365, validDates.length) + '%\"></i></div><div class=\"miniBarVal\">' + n365 + ' (' + pct(n365, validDates.length) + '%)</div></div></div><div class=\"timeRow\" data-range=\"old3\"><span>Äldre än 3 år</span><div class=\"miniBar\"><div class=\"miniBarTrack\"><i style=\"width:' + pct(old3Count, validDates.length) + '%\"></i></div><div class=\"miniBarVal\">' + old3Count + ' (' + pct(old3Count, validDates.length) + '%)</div></div></div></div>' + riskBlock + yearsHtml + '</div><div class=\"card\"><h3>Validator</h3><div class=\"kv\"><div class=\"kvRow\"><span class=\"statLabel\">XML-status</span><span class=\"' + parseStatusClass + '\">' + parseStatusText + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Rot-element</span><span class=\"' + rootTypeClass + '\">' + escQ(rootTypeText) + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Namespace</span><span class=\"' + nsClass + '\">' + nsText + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Blandade url/sitemap</span><span class=\"statValue' + (mixedType ? ' warn' : '') + '\">' + (mixedType ? 'Ja' : 'Nej') + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Ogiltiga &lt;lastmod&gt;</span><span class=\"' + invalidLmClass + '\">' + invalidLmText + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Noder utan &lt;loc&gt;</span><span class=\"' + missingLocClass + '\">' + missingLocText + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Dubbletter av URL</span><span class=\"' + dupClass + '\">' + dupText + '</span></div></div></div></div><div class=\"slugStrip\"><div class=\"statLabel\">Slug-analys</div><div class=\"slugChipRow\"><span class=\"slugChipLabel\">Enord</span><span id=\"slugWords\"></span></div><div class=\"slugChipRow\"><span class=\"slugChipLabel\" id=\"slugBigLabel\">Tvåord</span><span id=\"slugBigrams\"></span></div></div><div class=\"card\" style=\"background:#20252f;border:1px solid #2b364a;border-radius:10px;padding:12px;color:#cfe0ff;margin-top:10px;\"><h3>Djupfördelning</h3><div id="depthViz"></div><ul id=\"depthList\">' + depthLis + '</ul></div></div><div id=\"cats\"><div class=\"catsHead\"><div class=\"catsTitle\">Struktur &amp; kategorier</div><div class=\"catsSub\">Klicka på kort, chip eller nivå för att filtrera URL-listan.</div></div><div id=\"catChips\">' + chipsHtml + '</div><div id=\"catRows\" style=\"margin-top:6px\">' + rows + '</div><div class=\"hint\">Hela kortet är klickbart. Underkategorier är indragna med markerad vänsterkant.</div></div><div id=\"list\"><div id=\"listHeader\"><div id=\"count\">0 / ' + TOTAL + ' URL:er visas</div><div id=\"listActions\"><div id=\"sortControls\"><button id=\"sortDefaultBtn\" type=\"button\">Standard</button><button id=\"sortDateBtn\" type=\"button\">Datum</button><button id=\"sortNameBtn\" type=\"button\">Namn</button></div><button id=\"copyBtn\" type=\"button\">Kopiera</button><button id=\"downloadBtn\" type=\"button\">Ladda ner (CSV)</button><button id=\"statusBtn\" type=\"button\">Statuskoll</button></div></div><ul id=\"l\">' + items + '</ul></div></div></div></body></html>';
+        
+        // NY HTML-STRUKTUR: BORT MED KNAPPEN, ERSÄTT MED TABELL
+        var html = '<!doctype html><html><head><meta charset="utf-8"><title>Sitemap-vy</title><link rel="icon" href="' + siteFavicon + '"><style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#1f1f1f;color:#fff;margin:0}#top{position:sticky;top:0;background:#111827;border-bottom:1px solid #2c2c2c;z-index:3}#topInner{max-width:1280px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:10px;justify-content:center}#k{width:min(1100px,80vw);padding:12px 16px;border-radius:999px;border:1px solid #4b5563;background:#020617;color:#fff;font-size:16px;outline:none;box-shadow:0 0 0 1px #020617,0 0 0 3px rgba(148,163,184,0.35)}#k:focus{box-shadow:0 0 0 1px #0f172a,0 0 0 5px rgba(56,189,248,0.35);border-color:#60a5fa;background:#020617}button{padding:6px 10px;background:#3b3b3b;color:#fff;border:none;border-radius:6px;cursor:pointer}button:hover{background:#575757}#wrap{max-width:1280px;margin:0 auto;padding:20px}h1{font-size:18px;margin:6px 0 14px;color:#ddd;display:flex;align-items:center;gap:6px}#siteIco{width:18px;height:18px;border-radius:4px;box-shadow:0 0 0 1px rgba(0,0,0,0.45);background:#020617}#grid{display:grid;grid-template-columns:minmax(220px,300px) 1fr;gap:24px;align-items:start}#stats{grid-column:1 / -1}#stats .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:10px}#stats .card{background:#20252f;border:1px solid #2b364a;border-radius:10px;padding:12px;color:#cfe0ff}#stats .card h3{margin:0 0 8px;font-size:13px;color:#eaf2ff}#stats .kv{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 16px;font-size:13px;line-height:1.35}#stats .kvRow{display:flex;flex-direction:column}.statLabel{font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:#9ca3af;margin-bottom:1px}.statValue{font-size:15px;font-weight:600;color:#e5e7eb}.statValue small{font-size:11px;font-weight:400;color:#9ca3af;margin-left:4px}.statValue.warn{color:#facc15}.statValue.bad{color:#f97316}.statValue.error{color:#ef4444}.statClick{background:none;border:none;padding:0;margin:0;font:inherit;color:inherit;cursor:pointer;text-align:left}.statClick:hover{text-decoration:underline}.slugStrip{margin-top:4px;padding-top:6px;border-top:1px solid #1f2937;font-size:12px}.slugChipRow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:3px}.slugChipLabel{font-size:11px;color:#9ca3af;text-transform:uppercase;letter-spacing:0.06em;margin-right:4px}.slugWord{background:#111827;border:1px solid #374151;color:#eaf2ff;cursor:pointer;padding:2px 7px;border-radius:999px;font:inherit;text-decoration:none;display:inline-block}.slugWord:hover{background:#1f2937;border-color:#60a5fa}.slugCount{font-size:10px;color:#a9c3ff;margin-left:3px}.timeRange{display:flex;gap:16px;margin-bottom:10px;flex-wrap:wrap}.timeBox{flex:1 1 0;min-width:120px;padding:8px;border-radius:8px;background:#1b2332;border:1px solid #2b364a}.timeFresh{display:flex;flex-direction:column;gap:6px;margin-top:4px;font-size:12px}.timeRow{display:flex;align-items:center;gap:8px;justify-content:space-between;cursor:pointer}.timeRow span{color:#d1d5db}.timeRow:hover span{color:#e5e7eb}.miniBar{flex:1 1 auto;display:flex;align-items:center;gap:6px}.miniBarTrack{position:relative;flex:1 1 auto;height:8px;border-radius:999px;background:#111827;overflow:hidden}.miniBarTrack i{display:block;height:100%;background:#58c49a}.miniBarVal{font-size:11px;color:#9ca3af;white-space:nowrap}.timeRisk{display:flex;flex-direction:column;gap:4px;margin:10px 0 0;font-size:12px}.timeNote{color:#9ca3af;font-size:11px}.timeList{display:flex;flex-wrap:wrap;gap:4px;font-size:11px;color:#d1d5db;margin-top:2px}.riskChip{padding:2px 7px;font-size:11px;border-radius:999px;background:#111827;border:1px solid #4b5563;color:#e5e7eb;cursor:pointer}.riskChip:hover{background:#1f2937;border-color:#9ca3af}.yearFilter{margin-top:8px;display:flex;flex-direction:column;gap:4px}.yearChips{display:flex;flex-wrap:wrap;gap:6px}.yearChip{padding:4px 8px;font-size:11px;border-radius:999px;background:#111827;border:1px solid #4b5563;color:#e5e7eb;cursor:pointer}.yearChip:hover{background:#1f2937;border-color:#9ca3af}.yearChipCount{font-size:10px;color:#9ca3af;margin-left:2px}#depthList{list-style:none;padding:0;margin:6px 0 0;display:flex;gap:10px;flex-wrap:wrap}#depthList li{display:flex;align-items:center;gap:6px}.depthBtn{padding:6px 10px;border-radius:6px;border:1px solid transparent;transition:background .15s ease,border-color .15s ease,color .15s ease}.depthBtn.green{background:#2f5a46;border-color:#58c49a;color:#eafff7}.depthBtn.green:hover{background:#3a6e57}.depthBtn.orange{background:#6e5324;border-color:#d6ad5c;color:#fff6e7}.depthBtn.orange:hover{background:#876733}.depthBtn.bad{background:#7f2222;border-color:#ef4444;color:#fee2e2}.depthBtn.bad:hover{background:#9e3333}.depthMeta{color:#a9c3ff}.thinChip{padding:2px 7px;font-size:11px;border-radius:999px;background:#111827;border:1px solid #4b5563;color:#e5e7eb;cursor:pointer;margin-left:4px}.thinChip:hover{background:#1f2937;border-color:#9ca3af}#cats{background:#232323;border:1px solid #2e2e2e;border-radius:12px;padding:14px}#cats .catsHead{margin-bottom:8px}#cats .catsTitle{font-weight:600;font-size:13px;margin-bottom:2px}#cats .catsSub{font-size:12px;color:#9ca3af;max-width:520px}#catChips{margin:6px 0 8px;display:flex;flex-wrap:wrap;gap:6px}.catChip{padding:4px 9px;font-size:12px;border-radius:999px;background:#1f2933;border:1px solid #374151;color:#e5e7eb;cursor:pointer}.catChip:hover{background:#111827;border-color:#4b5563}#list{background:#232323;border:1px solid #2e2e2e;border-radius:12px;padding:14px;min-height:200px}#listHeader{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px}#listActions{display:flex;gap:6px;align-items:center}#listActions button{padding:4px 8px;font-size:11px;border-radius:999px}#sortControls{display:flex;gap:4px;margin-right:4px}#count{margin:0;color:#bbb;font-weight:600;font-size:13px}.row{padding:8px 10px;margin:6px 0;cursor:pointer;display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto auto;align-items:center;gap:4px;border-radius:10px;border:1px solid #4b5563;background:radial-gradient(circle at top left,#111827,#020617);box-shadow:0 4px 10px rgba(0,0,0,0.45);transition:background .15s ease,border-color .15s ease,transform .05s ease,box-shadow .1s ease}.row:hover{background:radial-gradient(circle at top left,#1f2937,#020617);border-color:#60a5fa;transform:translateY(-1px);box-shadow:0 6px 16px rgba(15,23,42,0.8)}.rowActive{background:radial-gradient(circle at top left,#1e293b,#020617);border-color:#93c5fd;box-shadow:0 0 0 1px #60a5fa,0 6px 16px rgba(15,23,42,0.9)}.leftcell{grid-column:1;grid-row:1;display:flex;align-items:center;gap:6px}.lbl{font-weight:600}.row:hover .lbl,.rowActive .lbl{color:#e5f2ff}.row.subrow .lbl{font-weight:400}.meta{grid-column:2;grid-row:1;color:#e5e7eb;text-align:right;white-space:nowrap;font-size:13px}.dates{grid-column:1 / -1;grid-row:2;color:#a9cff;font-size:12px;opacity:.95}.bar{grid-column:1 / -1;grid-row:3;height:8px;background:#333;border-radius:999px;overflow:hidden;margin-top:2px}.bar>i{display:block;height:100%;background:#58c49a}.subrow{margin-left:15px;background:rgba(255,255,255,0.03);border-left:3px solid #4b5563}.caret{display:inline-flex;width:14px;justify-content:center;align-items:center;font-size:11px;color:#9ca3af}.caret::before{content:"›";font-weight:bold}ul{list-style:square;padding-left:18px;margin:10px 0 0}li{margin:7px 0;line-height:1.28}a{color:#fff;text-decoration:none;border:0}a:hover{text-decoration:none;border:0}#list ul{list-style:none;padding-left:0;margin:10px 0 0}#list ul li{position:relative;display:flex;justify-content:space-between;align-items:flex-start;gap:6px;margin:11px 0;line-height:1.32}#list ul li::before{content:"■";font-size:7px;color:#6b7280;margin-top:4px;flex:0 0 auto}#list ul li a{flex:1 1 auto;min-width:0}.urlDate{flex:0 0 auto;font-size:11px;color:#9ca3af;white-space:nowrap;margin-left:6px}.urlOldTag{color:#f97316;font-weight:600;margin-left:4px}.urlStatus{font-size:11px;margin-left:6px;padding:2px 6px;border-radius:999px;border:1px solid #4b5563;color:#e5e7eb;background:#111827}.urlStatus.ok{border-color:#22c55e;color:#bbf7d0;background:#14532d}.urlStatus.notfound{border-color:#ef4444;color:#fee2e2;background:#7f1d1d}.urlStatus.redirect{border-color:#eab308;color:#fef9c3;background:#713f12}.urlStatus.other{border-color:#6b7280;color:#e5e7eb;background:#111827}.urlStatus.err{border-color:#ef4444;color:#fee2e2;background:#7f1d1d}.hint{color:#9a9a9a;font-size:12px;margin:8px 0 0}#depthViz{padding:0;}.vizTable{width:100%;border-collapse:collapse;margin:0;font-size:12px}.vizTable th{text-align:left;padding:8px 6px;color:#9ca3af}.vizTable td{padding:8px 6px;border-top:1px solid #2b364a;cursor:pointer;}.vizTable td:hover{background:#2a344a;}.depthBar{height:8px;border-radius:4px;margin-left:10px;width:100%;}.depthBar.g{background:#58c49a}.depthBar.o{background:#facc15}.depthBar.r{background:#f97316}.depthCount{font-size:13px;font-weight:600; text-align:right;}#depthList{display:none;}</style></head><body><div id="top"><div id="topInner"><button id="closeBtn">Stäng</button><button id="resetBtn">Rensa</button><input id="k" placeholder="Sök (blanksteg = OCH)"><button id="reportBtn" type="button">Rapport</button></div></div><div id="wrap"><h1><img id="siteIco" src="' + siteFavicon + '" alt=""> Sitemap!!!</h1><div id="grid"><div id="stats"><div class="cards"><div class="card"><h3>Översikt</h3><div class="kv"><div class="kvRow"><span class="statLabel">Totalt antal URL</span><span class="statValue">' + TOTAL + '<small>st</small></span></div><div class="kvRow"><span class="statLabel">Mappar (nivå 1)</span><span class="statValue">' + folders.length + '</span></div><div class="kvRow"><span class="statLabel">Sajtens djup</span><span class="' + depthClass + '\">' + maxDepth + '<small>nivåer</small></span></div><div class="kvRow"><span class="statLabel">Saknar &lt;lastmod&gt;</span>' + missHtml + '</div><div class="kvRow"><span class="statLabel">URL med parametrar</span>' + paramHtml + '</div><div class="kvRow"><span class="statLabel">Ofullständiga URL</span>' + invalidHtml + '</div><div class="kvRow"><span class="statLabel">Bilder i sitemap</span>' + imgHtml + '</div><div class="kvRow"><span class="statLabel">PDF i sitemap</span>' + pdfHtml + '</div><div class="kvRow"><span class=\"statLabel\">Tunna mappar (1 URL)</span><span class=\"' + thinClass + '\">' + thinFolders.length + '<small> st</small>' + (thinChipsHtml ? ' ' + thinChipsHtml : '') + '</span></div>' + langLine + '</div></div><div class=\"card\"><h3>Aktualitet</h3><div class=\"timeRange\"><div class=\"timeBox\"><div class=\"statLabel\">Äldsta URL</div><div class=\"statValue\">' + fmt(globalOld || null) + '</div></div><div class=\"timeBox\"><div class=\"statLabel\">Nyaste URL</div><div class=\"statValue\">' + fmt(globalNew || null) + '</div></div></div><div class=\"timeFresh\"><div class=\"timeRow\" data-range=\"30\"><span>Senaste 30 d</span><div class=\"miniBar\"><div class=\"miniBarTrack\"><i style=\"width:' + pct(n30, validDates.length) + '%\"></i></div><div class=\"miniBarVal\">' + n30 + ' (' + pct(n30, validDates.length) + '%)</div></div></div><div class=\"timeRow\" data-range=\"90\"><span>Senaste 90 d</span><div class=\"miniBar\"><div class=\"miniBarTrack\"><i style=\"width:' + pct(n90, validDates.length) + '%\"></i></div><div class=\"miniBarVal\">' + n90 + ' (' + pct(n90, validDates.length) + '%)</div></div></div><div class=\"timeRow\" data-range=\"365\"><span>Senaste 365 d</span><div class=\"miniBar\"><div class=\"miniBarTrack\"><i style=\"width:' + pct(n365, validDates.length) + '%\"></i></div><div class=\"miniBarVal\">' + n365 + ' (' + pct(n365, validDates.length) + '%)</div></div></div><div class=\"timeRow\" data-range=\"old3\"><span>Äldre än 3 år</span><div class=\"miniBar\"><div class=\"miniBarTrack\"><i style=\"width:' + pct(old3Count, validDates.length) + '%\"></i></div><div class=\"miniBarVal\">' + old3Count + ' (' + pct(old3Count, validDates.length) + '%)</div></div></div></div>' + riskBlock + yearsHtml + '</div><div class=\"card\"><h3>Validator</h3><div class=\"kv\"><div class=\"kvRow\"><span class=\"statLabel\">XML-status</span><span class=\"' + parseStatusClass + '\">' + parseStatusText + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Rot-element</span><span class=\"' + rootTypeClass + '\">' + escQ(rootTypeText) + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Namespace</span><span class=\"' + nsClass + '\">' + nsText + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Blandade url/sitemap</span><span class=\"statValue' + (mixedType ? ' warn' : '') + '\">' + (mixedType ? 'Ja' : 'Nej') + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Ogiltiga &lt;lastmod&gt;</span><span class=\"' + invalidLmClass + '\">' + invalidLmText + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Noder utan &lt;loc&gt;</span><span class=\"' + missingLocClass + '\">' + missingLocText + '</span></div><div class=\"kvRow\"><span class=\"statLabel\">Dubbletter av URL</span><span class=\"' + dupClass + '\">' + dupText + '</span></div></div></div></div><div class=\"slugStrip\"><div class=\"statLabel\">Slug-analys</div><div class=\"slugChipRow\"><span class=\"slugChipLabel\">Enord</span><span id=\"slugWords\"></span></div><div class=\"slugChipRow\"><span class=\"slugChipLabel\" id=\"slugBigLabel\">Tvåord</span><span id=\"slugBigrams\"></span></div></div><div class=\"card\" style=\"background:#20252f;border:1px solid #2b364a;border-radius:10px;padding:12px;color:#cfe0ff;margin-top:10px;\"><h3>Djupfördelning</h3><div id="depthViz">' + depthVizHtml + '</div></div></div><div id=\"cats\"><div class=\"catsHead\"><div class=\"catsTitle\">Struktur &amp; kategorier</div><div class=\"catsSub\">Klicka på kort, chip eller nivå för att filtrera URL-listan.</div></div><div id=\"catChips\">' + chipsHtml + '</div><div id=\"catRows\" style=\"margin-top:6px\">' + rows + '</div><div class=\"hint\">Hela kortet är klickbart. Underkategorier är indragna med markerad vänsterkant.</div></div><div id=\"list\"><div id=\"listHeader\"><div id=\"count\">0 / ' + TOTAL + ' URL:er visas</div><div id=\"listActions\"><div id=\"sortControls\"><button id=\"sortDefaultBtn\" type=\"button\">Standard</button><button id=\"sortDateBtn\" type=\"button\">Datum</button><button id=\"sortNameBtn\" type=\"button\">Namn</button></div><button id=\"copyBtn\" type=\"button\">Kopiera</button><button id=\"downloadBtn\" type=\"button\">Ladda ner (CSV)</button><button id=\"statusBtn\" type=\"button\">Statuskoll</button></div></div><ul id=\"l\">' + items + '</ul></div></div></div></body></html>';
         var w = open('', '_blank');
         if (!w) {
             E('Kunde inte öppna nytt fönster/flik');
@@ -1283,81 +1352,12 @@
             })()
         }
 
-        function renderDepthVizRobust() {
+        // FUNKTION FÖR ATT LÄGGA TILL FILTERLYSSNARE PÅ DEN NYA DJUPSYNS-TABELLEN
+        function setupDepthVizListeners() {
             var depthVizEl = $('depthViz');
-            var depthListEl = $('depthList');
-            if (!depthVizEl || !depthListEl) {
-                console.error("Kunde inte hitta element för djupvisualisering.");
-                return;
-            }
-
-            var depthKeys = Object.keys(depthCounts).map(function(x) {
-                return +x
-            }).sort(function(a, b) {
-                return a - b
-            });
+            if (!depthVizEl) return;
             
-            console.log("--- DIAGNOSTIK DJUPSYN START ---");
-            console.log("Antal unika djupnivåer hittade: ", depthKeys.length);
-            console.log("Rå data (depthCounts): ", depthCounts);
-
-            var maxCount = 0;
-            for (var i = 0; i < depthKeys.length; i++) {
-                var count = depthCounts[depthKeys[i]];
-                if (count > maxCount) maxCount = count;
-            }
-            
-            if (maxCount === 0) {
-                depthVizEl.innerHTML = '<p style="color:#f97316; text-align:center;">Hittade inga URL:er med djupinformation (maxCount = 0).</p>';
-                console.log("DIAGNOSTIK: Max Count är 0. Visar felmeddelande.");
-                console.log("--- DIAGNOSTIK DJUPSYN SLUT ---");
-                return;
-            }
-            
-            // 1. Skapa HTML-tabell (Robust Visualisering)
-            var tableHtml = '<table class="vizTable"><thead><tr><th>Djup</th><th>Antal URL</th><th style="width: 60%;">Fördelning (relativt max)</th></tr></thead><tbody>';
-            var consoleOutput = '\n--- Djupfördelning (Console Log) ---\n';
-            
-            for (var i = 0; i < depthKeys.length; i++) {
-                var depth = depthKeys[i];
-                var count = depthCounts[depth];
-                var percentage = (count / maxCount) * 100; // Använd maxCount för att skala stapeln
-                var displayPct = Math.round((count / TOTAL) * 1000) / 10;
-
-                var colorClass;
-                var risk = 'Låg Risk';
-                if (depth <= 3) {
-                    colorClass = 'g';
-                } else if (depth <= 6) {
-                    colorClass = 'o';
-                    risk = 'Viss Risk';
-                } else {
-                    colorClass = 'r';
-                    risk = 'Hög Risk';
-                }
-                
-                // HTML Row
-                // Använd <td> som klickbar container istället för knapp inuti <td> för att förenkla layout
-                tableHtml += '<tr data-depth="' + depth + '"><td>Nivå ' + depth + '</td>';
-                tableHtml += '<td class="depthCount">' + count + ' <span style="color:#9ca3af;font-size:11px;">(' + displayPct + '%)</span></td>';
-                tableHtml += '<td><div class="depthBar ' + colorClass + '" style="width:calc(' + percentage.toFixed(1) + '% + 1px);"></div></td></tr>';
-                // +1px för att garantera att även 0% staplar syns minimalt
-                
-                // Console Output (ASCII Bar Chart)
-                var barLength = Math.round(percentage / 3); 
-                var bar = '#'.repeat(barLength);
-                consoleOutput += 'Nivå ' + depth + ' (' + count + ')\t[' + bar.padEnd(30, ' ') + '] ' + risk + '\n';
-            }
-            tableHtml += '</tbody></table>';
-
-            // 2. Visa Tabellen i HTML
-            depthVizEl.innerHTML = tableHtml + '<p style="font-size:11px; color:#9ca3af; margin-top: 10px;">Stapelns längd är relativ till det djup som har flest URL:er.</p>';
-            
-            // 3. Logga till Konsolen (Garanterad visuell feed-back)
-            console.log(consoleOutput);
-            console.log("--- DIAGNOSTIK DJUPSYN SLUT ---");
-
-            // 4. Lägg till Eventlyssnare för filtrering på hela raden
+            // Lägg till Eventlyssnare för filtrering på hela raden
             depthVizEl.querySelectorAll('.vizTable tr[data-depth]').forEach(function(row) {
                 row.addEventListener('click', function() {
                     var d = parseInt(this.getAttribute('data-depth') || '0', 10);
@@ -1368,49 +1368,23 @@
                     clearActiveRows();
                 });
             });
-        }
-
-
-        (function() {
-            var depthListEl = $('depthList');
-            var depthVizEl = $('depthViz');
-            var depthVizBtn = $('depthVizBtn');
-            var vizActive = false;
-            
-            // Initial state: show list, hide viz
-            if (depthListEl) depthListEl.style.display = '';
-            if (depthVizEl) depthVizEl.style.display = 'none';
-
-            if (depthVizBtn) {
-                depthVizBtn.onclick = function() {
-                    vizActive = !vizActive;
-                    if (vizActive) {
-                        renderDepthVizRobust(); // Kallar den robusta funktionen
-                        if (depthListEl) depthListEl.style.display = 'none';
-                        if (depthVizEl) depthVizEl.style.display = '';
-                        depthVizBtn.textContent = 'Djup – Lista';
-                        console.log("Djupsyn-visualisering aktiverad. Kontrollera HTML-tabellen och konsolen för utdata.");
-                    } else {
-                        if (depthListEl) depthListEl.style.display = '';
-                        if (depthVizEl) depthVizEl.style.display = 'none';
-                        depthVizBtn.textContent = 'Djupsyn';
-                    }
-                }
-            }
-            
-            // Bevara klick för den vanliga listan
-            if (!depthListEl) return;
-            depthListEl.addEventListener('click', function(ev) {
-                var btn = ev.target.closest('.depthBtn');
-                if (!btn) return;
-                var d = parseInt(btn.getAttribute('data-depth') || '0', 10);
-                if (!d) return;
-                showOnly(function(li) {
-                    return parseInt(li.getAttribute('data-depth') || '0', 10) === d
+            // Lägg till Eventlyssnare för filtrering på knapparna
+            depthVizEl.querySelectorAll('.depthBtn').forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Hindrar klicket från att trigga rad-lyssnaren
+                    var d = parseInt(this.getAttribute('data-depth') || '0', 10);
+                    if (!d) return;
+                    showOnly(function(li) {
+                        return parseInt(li.getAttribute('data-depth') || '0', 10) === d
+                    });
+                    clearActiveRows();
                 });
-                clearActiveRows()
-            })
-        })();
+            });
+        }
+        
+        // KALLA PÅ FUNKTIONEN DIREKT EFTER ATT HTML-SIDAN ÄR GENERERAD
+        setupDepthVizListeners(); 
+        
         (function() {
             var tf = doc.querySelector('.timeFresh');
             if (!tf) return;
