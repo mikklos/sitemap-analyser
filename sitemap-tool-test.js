@@ -1292,7 +1292,7 @@
                 return a - b
             });
             
-            // Collect data for visualization
+            // Collect data and find max count
             var maxCount = 0;
             for (var i = 0; i < depthKeys.length; i++) {
                 var count = depthCounts[depthKeys[i]];
@@ -1322,25 +1322,31 @@
             if (!svg || !data.length) return;
             svg.innerHTML = ''; // Clear previous content
 
-            var width = 600; // Fixed SVG internal width for reliable positioning
-            var height = 300; // Fixed SVG internal height
+            var width = 600; 
+            var height = 300; 
             svg.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
             
             var maxRadius = (height / 2) * 0.8; 
             var minRadius = 8;
+            var minRadiusVis = 1; // Minimum visible radius to avoid completely invisible circles
             var numDepths = data.length;
             var spacing = width / (numDepths + 1);
             
-            // --- FÖRBÄTTRAD SKALNING (KVADRATROT) ---
+            // Calculate max square root for scaling factor
             var maxCountSqrt = Math.sqrt(maxCount);
 
             var scale = function(value) {
+                if (maxCount === 0) return minRadius;
+                
                 var valueSqrt = Math.sqrt(value);
-                // ensures non-zero scaling even if value is small
                 var factor = maxCountSqrt > 0 ? (valueSqrt / maxCountSqrt) : 0;
-                return minRadius + (maxRadius - minRadius) * factor;
+                
+                // Scale within the range [minRadius, maxRadius]
+                var radius = minRadius + (maxRadius - minRadius) * factor;
+                
+                // Ensure the smallest dot is at least visually represented by minRadiusVis (1px)
+                return Math.max(minRadiusVis, radius);
             };
-            // ----------------------------------------
 
             for (var i = 0; i < data.length; i++) {
                 var d = data[i];
@@ -1348,7 +1354,7 @@
                 var cx = spacing * (i + 1);
                 var cy = height / 2;
                 
-                // Add the circle (bubble)
+                // 1. Add the circle (bubble)
                 var circle = doc.createElementNS('http://www.w3.org/2000/svg', 'circle');
                 circle.setAttribute('class', 'bubble ' + d.colorClass);
                 circle.setAttribute('cx', cx);
@@ -1356,17 +1362,16 @@
                 circle.setAttribute('r', r);
                 circle.setAttribute('data-depth', d.depth);
                 
-                // Add tooltip (title element)
                 var title = doc.createElementNS('http://www.w3.org/2000/svg', 'title');
                 title.textContent = 'Nivå ' + d.depth + ': ' + d.count + ' URL:er';
                 circle.appendChild(title);
 
                 svg.appendChild(circle);
                 
-                // Add text label (below the bubble)
+                // 2. Add text label (below the bubble)
                 var text = doc.createElementNS('http://www.w3.org/2000/svg', 'text');
                 text.setAttribute('x', cx);
-                text.setAttribute('y', cy + r + 20); // Position below the bubble
+                text.setAttribute('y', cy + maxRadius + 20); // Anchored below the largest possible bubble
                 text.setAttribute('text-anchor', 'middle');
                 text.setAttribute('fill', '#e5e7eb');
                 text.setAttribute('font-size', '12px');
@@ -1374,7 +1379,7 @@
                 text.textContent = 'Nivå ' + d.depth;
                 svg.appendChild(text);
 
-                // Add count label ( inside the bubble if large enough)
+                // 3. Add count label (inside the bubble if large enough)
                 if (r > 16) {
                     var countText = doc.createElementNS('http://www.w3.org/2000/svg', 'text');
                     countText.setAttribute('x', cx);
@@ -1382,7 +1387,7 @@
                     countText.setAttribute('text-anchor', 'middle');
                     countText.setAttribute('fill', d.colorClass === 'o' ? '#111827' : '#e5e7eb');
                     countText.setAttribute('font-size', '11px');
-                    countText.setAttribute('pointer-events', 'none'); // Important to allow click-through
+                    countText.setAttribute('pointer-events', 'none'); 
                     countText.textContent = d.count;
                     svg.appendChild(countText);
                 }
