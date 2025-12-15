@@ -1013,7 +1013,8 @@
             refresh(); // Uppdatera räknare och slug-analys
         }
 
-        function clearCategoryFilters(includeSearch) {
+        // Funktion för att helt rensa alla filter utom search
+        function clearAllNonSearchFilters() {
              activeFilters.category = '';
              activeFilters.sub = '';
              activeFilters.root = false;
@@ -1021,10 +1022,7 @@
              activeFilters.range = null;
              activeFilters.year = null;
              activeFilters.stat = null;
-             if (includeSearch !== true) {
-                 activeFilters.search = '';
-                 if ($('k')) $('k').value = '';
-             }
+             // Lämna activeFilters.search intakt
         }
 
         // SLUT CENTRAL FILTRERINGSLOGIK
@@ -1192,9 +1190,9 @@
                     multiFilterMode = toggleEl.checked;
                     
                     if (!multiFilterMode) {
-                        // Om vi stänger av multi-läge, rensa alla filter utom söktermen
+                        // Om vi stänger av multi-läge, rensa alla icke-sök filter
                         var searchVal = activeFilters.search;
-                        clearCategoryFilters(false);
+                        clearAllNonSearchFilters();
                         activeFilters.search = searchVal;
                     }
                     applyFilters();
@@ -1207,10 +1205,10 @@
         if ($('resetBtn')) {
             $('resetBtn').onclick = function() {
                 // Återställ alla filter, inkl. sök
-                clearCategoryFilters(false);
+                activeFilters.search = '';
+                clearAllNonSearchFilters();
                 
                 collapseAllSubs();
-                clearActiveRows();
                 
                 // Återställ kryssrutan
                 var toggleEl = doc.getElementById('multiFilterToggle');
@@ -1244,7 +1242,7 @@
                 var isActive = activeFilters.depth === d;
 
                 if (!multiFilterMode && !isActive) {
-                    clearCategoryFilters(true);
+                    clearAllNonSearchFilters();
                 }
 
                 if (isActive) {
@@ -1269,7 +1267,7 @@
                 var isActive = activeFilters.range === r;
 
                 if (!multiFilterMode && !isActive) {
-                    clearCategoryFilters(true);
+                    clearAllNonSearchFilters();
                 }
                 
                 if (isActive) {
@@ -1293,7 +1291,7 @@
                     var isActive = activeFilters.year === y;
                     
                     if (!multiFilterMode && !isActive) {
-                        clearCategoryFilters(true);
+                        clearAllNonSearchFilters();
                     }
                     
                     if (isActive) {
@@ -1314,7 +1312,7 @@
                 var isActiveStat = activeFilters.stat === kind;
 
                 if (!multiFilterMode && !isActiveStat) {
-                    clearCategoryFilters(true);
+                    clearAllNonSearchFilters();
                 }
                 
                 if (isActiveStat) {
@@ -1335,10 +1333,10 @@
                 if (!btn) return;
                 
                 var cat = btn.getAttribute('data-l1') || '';
-                var isActive = btn.classList.contains('filterActive'); // Vi kollar den visuella markeringen här
+                var isActive = btn.classList.contains('filterActive'); 
 
                 if (!multiFilterMode && !isActive) {
-                    clearCategoryFilters(true);
+                    clearAllNonSearchFilters();
                     collapseAllSubs();
                 }
 
@@ -1351,7 +1349,7 @@
                     activeFilters.category = cat;
                     activeFilters.sub = '';
                     activeFilters.root = false;
-                    // Ingen toggleSubsFor här, eftersom det är chipsen.
+                    // Vi kan inte toggle subrader från chipsen, det görs via raderna
                 }
                 
                 applyFilters();
@@ -1362,7 +1360,7 @@
         })();
 
 
-        // Kategori-rader (Rows)
+        // Kategori-rader (Rows) - ÅTGÄRDAD LOGIK FÖR AKTIVERING
         (function() {
             var wrap = $('catRows');
             if (!wrap) return;
@@ -1371,9 +1369,9 @@
                 if (!row || !wrap.contains(row)) return;
                 
                 var isRoot = row.getAttribute('data-root') === '1',
-                    parent = row.getAttribute('data-parent'), // Endast för subrow
-                    sub = row.getAttribute('data-sub'),       // Endast för subrow
-                    l1 = row.getAttribute('data-l1');         // Endast för mainrow
+                    parent = row.getAttribute('data-parent'), 
+                    sub = row.getAttribute('data-sub'),       
+                    l1 = row.getAttribute('data-l1');         
 
                 var isActive = row.classList.contains('rowActive');
 
@@ -1384,7 +1382,8 @@
 
                 // 2. Hantera enkel-läge/nollställning
                 if (!multiFilterMode && !isActive) {
-                    clearCategoryFilters(true);
+                    // Om vi är i enkelt läge och klickar på ett nytt filter, rensa ALLA andra filter
+                    clearAllNonSearchFilters();
                 }
                 
                 // 3. Hantera toggle/sätta aktivt filter
